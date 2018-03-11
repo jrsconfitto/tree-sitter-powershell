@@ -3,8 +3,12 @@ Comments
 ============================================
 
 # this is a comment
-<# Multiline comments! #>
+<#
+    Multiline comments!
+#>
 
 ---
 
-(program (comment) (comment))
+(program
+    (comment)
+    (comment))

@@ -26,6 +26,9 @@ module.exports = grammar({
 
     number: $ => /\d+/,
 
-    comment: $ => token(choice(/#.*/, seq("<#", /.*/, "#>")))
+    // Ref: https://github.com/tree-sitter/tree-sitter-javascript/blob/e2d88fff88f6452c61cb26edc709b0563f137427/grammar.js#L708
+    // Ref: https://stackoverflow.com/questions/13014947/regex-to-match-a-c-style-multiline-comment/36328890#36328890
+    comment: $ =>
+      token(choice(/#.*/, seq("<#", /[^#]*\#+(?:[^<#][^#]*#+)*/, ">")))
   }
 });
