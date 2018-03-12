@@ -63,6 +63,10 @@
           "name": "number"
         },
         {
+          "type": "SYMBOL",
+          "name": "boolean_value"
+        },
+        {
           "type": "PREC_LEFT",
           "value": 1,
           "content": {
@@ -166,6 +170,19 @@
               }
             ]
           }
+        }
+      ]
+    },
+    "boolean_value": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "true"
+        },
+        {
+          "type": "STRING",
+          "value": "false"
         }
       ]
     },

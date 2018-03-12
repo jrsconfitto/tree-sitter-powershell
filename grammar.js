@@ -15,12 +15,15 @@ module.exports = grammar({
       choice(
         $.user_variable,
         $.number,
+        $.boolean_value,
         prec.left(1, seq($.expression, "+", $.expression)),
         prec.left(1, seq($.expression, "-", $.expression)),
         prec.left(2, seq($.expression, "*", $.expression)),
         prec.left(2, seq($.expression, "/", $.expression)),
         prec.left(3, seq($.expression, "^", $.expression))
       ),
+
+    boolean_value: $ => choice("true", "false"),
 
     // User variables
     // Ref: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_variables?view=powershell-6

@@ -7,6 +7,8 @@ $awesome;
 $zilch;
 $b0;
 $c_useful;
+true;
+false;
 
 ---
 
@@ -15,4 +17,6 @@ $c_useful;
     (expression_statement (expression (user_variable)))
     (expression_statement (expression (user_variable)))
     (expression_statement (expression (user_variable)))
-    (expression_statement (expression (user_variable))))
+    (expression_statement (expression (user_variable)))
+    (expression_statement (expression (boolean_value)))
+    (expression_statement (expression (boolean_value))))
