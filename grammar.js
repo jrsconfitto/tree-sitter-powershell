@@ -32,10 +32,6 @@ module.exports = grammar({
       const signed_integer = seq(optional(choice("-", "+")), decimal_digits);
       const exponent_part = seq(choice("e", "E"), signed_integer);
 
-      const binary_literal = seq(choice("0b", "0B"), /[0-1]+/);
-
-      const octal_literal = seq(choice("0o", "0O"), /[0-7]+/);
-
       const decimal_integer_literal = choice(
         "0",
         seq(/[1-9]/, optional(decimal_digits))
@@ -53,7 +49,7 @@ module.exports = grammar({
       );
 
       return token(
-        choice(hex_literal, decimal_literal, binary_literal, octal_literal)
+        choice(hex_literal, decimal_literal)
       );
     },
 
