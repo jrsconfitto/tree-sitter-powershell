@@ -7,8 +7,8 @@ $awesome;
 $zilch;
 $b0;
 $c_useful;
-true;
-false;
+$TRUE;
+$FALSE;
 
 ---
 

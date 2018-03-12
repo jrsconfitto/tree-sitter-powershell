@@ -178,11 +178,11 @@
       "members": [
         {
           "type": "STRING",
-          "value": "true"
+          "value": "$TRUE"
         },
         {
           "type": "STRING",
-          "value": "false"
+          "value": "$FALSE"
         }
       ]
     },
