@@ -1,0 +1,18 @@
+===
+$variables
+===
+
+$a;
+$awesome;
+$zilch;
+$b0;
+$c_useful;
+
+---
+
+(program
+    (expression_statement (expression (user_variable)))
+    (expression_statement (expression (user_variable)))
+    (expression_statement (expression (user_variable)))
+    (expression_statement (expression (user_variable)))
+    (expression_statement (expression (user_variable))))

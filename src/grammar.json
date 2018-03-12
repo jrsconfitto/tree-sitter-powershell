@@ -22,7 +22,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "variable"
+          "name": "user_variable"
         },
         {
           "type": "STRING",
@@ -56,7 +56,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "variable"
+          "name": "user_variable"
         },
         {
           "type": "SYMBOL",
@@ -169,9 +169,9 @@
         }
       ]
     },
-    "variable": {
+    "user_variable": {
       "type": "PATTERN",
-      "value": "\\a\\w*"
+      "value": "\\$[a-zA-Z]\\w*"
     },
     "number": {
       "type": "TOKEN",
@@ -469,50 +469,6 @@
                     ]
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "0b"
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "0B"
-                  }
-                ]
-              },
-              {
-                "type": "PATTERN",
-                "value": "[0-1]+"
-              }
-            ]
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "0o"
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "0O"
-                  }
-                ]
-              },
-              {
-                "type": "PATTERN",
-                "value": "[0-7]+"
               }
             ]
           }

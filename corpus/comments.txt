@@ -7,11 +7,11 @@ Comments
     Multiline comments!
 #>
 
-a = 4;
+$a = 4;
 
 ---
 
 (program
     (comment)
     (comment)
-    (assignment_statement (variable) (expression (number))))
+    (assignment_statement (user_variable) (expression (number))))

@@ -7,13 +7,13 @@ module.exports = grammar({
     program: $ =>
       repeat(choice($.assignment_statement, $.expression_statement)),
 
-    assignment_statement: $ => seq($.variable, "=", $.expression, ";"),
+    assignment_statement: $ => seq($.user_variable, "=", $.expression, ";"),
 
     expression_statement: $ => seq($.expression, ";"),
 
     expression: $ =>
       choice(
-        $.variable,
+        $.user_variable,
         $.number,
         prec.left(1, seq($.expression, "+", $.expression)),
         prec.left(1, seq($.expression, "-", $.expression)),
@@ -22,7 +22,10 @@ module.exports = grammar({
         prec.left(3, seq($.expression, "^", $.expression))
       ),
 
-    variable: $ => /\a\w*/,
+    // User variables
+    // Ref: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_variables?view=powershell-6
+    user_variable: $ => /\$[a-zA-Z]\w*/,
+
 
     // Ref: https://github.com/tree-sitter/tree-sitter-javascript/blob/e2d88fff88f6452c61cb26edc709b0563f137427/grammar.js#L765
     number: $ => {
