@@ -2,24 +2,20 @@
 Decimals
 ===
 
-5.3;
-4;
+5.3
+4
 
 ---
 
-(program
-    (expression_statement (expression (number)))
-    (expression_statement (expression (number))))
+(script (number) (number))
 
 ===
 Hex
 ===
 
-0xA;
-0xAB10CDEF;
+0xA
+0xAB10CDEF
 
 ---
 
-(program
-    (expression_statement (expression (number)))
-    (expression_statement (expression (number))))
+(script (number) (number))

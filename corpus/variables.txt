@@ -2,30 +2,30 @@
 $variables
 ===
 
-$a;
-$awesome;
-$zilch;
-$b0;
-$c_useful;
+$a
+$awesome
+$zilch
+$b0
+$c_useful
 
 ---
 
-(program
-    (expression_statement (expression (user_variable)))
-    (expression_statement (expression (user_variable)))
-    (expression_statement (expression (user_variable)))
-    (expression_statement (expression (user_variable)))
-    (expression_statement (expression (user_variable))))
+(script
+    (user_variable)
+    (user_variable)
+    (user_variable)
+    (user_variable)
+    (user_variable))
 
 ===
 booleans
 ===
 
-$TRUE;
-$FALSE;
+$TRUE
+$FALSE
 
 ---
 
-(program
-    (expression_statement (expression (boolean_value)))
-    (expression_statement (expression (boolean_value))))
+(script
+    (boolean_value)
+    (boolean_value))
