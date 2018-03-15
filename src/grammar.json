@@ -35,8 +35,21 @@
       ]
     },
     "param_block": {
-      "type": "STRING",
-      "value": "PARAM"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "PARAM"
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
     },
     "script_block": {
       "type": "REPEAT1",

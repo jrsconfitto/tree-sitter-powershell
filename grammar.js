@@ -20,7 +20,9 @@ module.exports = grammar({
         optional($.signature_block)
       ),
 
-    param_block: $ => "PARAM",
+    param_block: $ => seq('PARAM', '(', /*repeat($.parameter),*/ ')'),
+
+    // parameter: $ => ,
 
     script_block: $ => repeat1($.statement),
 
