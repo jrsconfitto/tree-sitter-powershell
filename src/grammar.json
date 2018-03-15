@@ -96,17 +96,13 @@
         },
         {
           "type": "SYMBOL",
-          "name": "type"
+          "name": "identifier"
         },
         {
           "type": "STRING",
           "value": "]"
         }
       ]
-    },
-    "type": {
-      "type": "STRING",
-      "value": "string"
     },
     "script_block": {
       "type": "REPEAT1",
@@ -177,6 +173,10 @@
     "user_variable": {
       "type": "PATTERN",
       "value": "\\$[a-zA-Z]\\w*"
+    },
+    "identifier": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z]\\w*"
     },
     "number": {
       "type": "TOKEN",

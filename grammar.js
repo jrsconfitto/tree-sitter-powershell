@@ -26,9 +26,7 @@ module.exports = grammar({
     parameter_declaration: $ =>
       seq(optional($.parameter_type), $.user_variable),
 
-    parameter_type: $ => seq("[", $.type, "]"),
-
-    type: $ => "string",
+    parameter_type: $ => seq("[", $.identifier, "]"),
 
     script_block: $ => repeat1($.statement),
 
@@ -74,6 +72,9 @@ module.exports = grammar({
     // User variables
     // Ref: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_variables?view=powershell-6
     user_variable: $ => /\$[a-zA-Z]\w*/,
+
+    // TODO: General identifier for now
+    identifier: $ => /[a-zA-Z]\w*/,
 
     // Automatic variables
     // Ref: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables?view=powershell-6
