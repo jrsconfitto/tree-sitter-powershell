@@ -1,12 +1,3 @@
-function caseInsensitive(keyword) {
-  return new RegExp(
-    keyword
-      .split("")
-      .map(letter => `[${letter}${letter.toUpperCase()}]`)
-      .join("")
-  );
-}
-
 module.exports = grammar({
   name: "powershell",
 
@@ -126,3 +117,12 @@ module.exports = grammar({
       token(choice(/#.*/, seq("<#", /[^#]*\#+(?:[^<#][^#]*#+)*/, ">")))
   }
 });
+
+function caseInsensitive(keyword) {
+  return new RegExp(
+    keyword
+      .split("")
+      .map(letter => `[${letter}${letter.toUpperCase()}]`)
+      .join("")
+  );
+}
