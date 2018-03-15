@@ -12,6 +12,7 @@ $a
 ---
 
 (script
-    (comment)
-    (comment)
-    (user_variable))
+  (comment)
+  (comment)
+  (script_block
+    (statement (user_variable))))

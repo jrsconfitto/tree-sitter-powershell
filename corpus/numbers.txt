@@ -7,7 +7,10 @@ Decimals
 
 ---
 
-(script (number) (number))
+(script
+  (script_block
+    (statement (number))
+    (statement (number))))
 
 ===
 Hex
@@ -18,4 +21,7 @@ Hex
 
 ---
 
-(script (number) (number))
+(script
+  (script_block
+    (statement (number))
+    (statement (number))))

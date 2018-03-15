@@ -1,0 +1,13 @@
+===
+General script
+===
+
+PARAM
+
+$a
+
+---
+
+(script
+  (param_block)
+  (script_block (statement (user_variable))))

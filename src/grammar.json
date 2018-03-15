@@ -2,24 +2,94 @@
   "name": "powershell",
   "rules": {
     "script": {
-      "type": "REPEAT",
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "param_block"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "script_block"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "signature_block"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "param_block": {
+      "type": "STRING",
+      "value": "PARAM"
+    },
+    "script_block": {
+      "type": "REPEAT1",
       "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "boolean_value"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "user_variable"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "number"
-          }
-        ]
+        "type": "SYMBOL",
+        "name": "statement"
       }
+    },
+    "statement": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "if"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "user_variable"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "boolean_value"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "number"
+        }
+      ]
+    },
+    "if": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "if"
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "boolean_value"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "signature_block": {
+      "type": "STRING",
+      "value": "# SIG"
     },
     "boolean_value": {
       "type": "CHOICE",
