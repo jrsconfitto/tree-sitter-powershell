@@ -67,3 +67,24 @@ $a
     (parameter_declaration
       (parameter_type (identifier)) (user_variable)))
   (script_block (statement (user_variable))))
+
+===
+Multiple parameters with types, separated by commas
+===
+
+PARAM (
+  [string] $arg1,
+  [string] $arg2
+)
+
+$a
+
+---
+
+(script
+  (param_block
+    (parameter_declaration
+      (parameter_type (identifier)) (user_variable))
+    (parameter_declaration
+      (parameter_type (identifier)) (user_variable)))
+  (script_block (statement (user_variable))))
