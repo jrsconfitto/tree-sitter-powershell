@@ -6,8 +6,8 @@
 #endif
 
 #define LANGUAGE_VERSION 6
-#define STATE_COUNT 29
-#define SYMBOL_COUNT 23
+#define STATE_COUNT 31
+#define SYMBOL_COUNT 24
 #define ALIAS_COUNT 0
 #define TOKEN_COUNT 14
 #define EXTERNAL_TOKEN_COUNT 0
@@ -35,7 +35,8 @@ enum {
   sym_statement = 19,
   sym_if = 20,
   sym_boolean_value = 21,
-  aux_sym_script_block_repeat1 = 22,
+  aux_sym_param_block_repeat1 = 22,
+  aux_sym_script_block_repeat1 = 23,
 };
 
 static const char *ts_symbol_names[] = {
@@ -61,6 +62,7 @@ static const char *ts_symbol_names[] = {
   [sym_statement] = "statement",
   [sym_if] = "if",
   [sym_boolean_value] = "boolean_value",
+  [aux_sym_param_block_repeat1] = "param_block_repeat1",
   [aux_sym_script_block_repeat1] = "script_block_repeat1",
 };
 
@@ -152,6 +154,10 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
   [sym_boolean_value] = {
     .visible = true,
     .named = true,
+  },
+  [aux_sym_param_block_repeat1] = {
+    .visible = false,
+    .named = false,
   },
   [aux_sym_script_block_repeat1] = {
     .visible = false,
@@ -619,17 +625,19 @@ static TSLexMode ts_lex_modes[STATE_COUNT] = {
   [15] = {.lex_state = 53},
   [16] = {.lex_state = 51},
   [17] = {.lex_state = 52},
-  [18] = {.lex_state = 52},
-  [19] = {.lex_state = 52},
+  [18] = {.lex_state = 54},
+  [19] = {.lex_state = 54},
   [20] = {.lex_state = 54},
-  [21] = {.lex_state = 52},
+  [21] = {.lex_state = 54},
   [22] = {.lex_state = 52},
-  [23] = {.lex_state = 51},
-  [24] = {.lex_state = 52},
-  [25] = {.lex_state = 51},
-  [26] = {.lex_state = 52},
-  [27] = {.lex_state = 53},
+  [23] = {.lex_state = 52},
+  [24] = {.lex_state = 51},
+  [25] = {.lex_state = 52},
+  [26] = {.lex_state = 54},
+  [27] = {.lex_state = 51},
   [28] = {.lex_state = 54},
+  [29] = {.lex_state = 53},
+  [30] = {.lex_state = 54},
 };
 
 static uint16_t ts_parse_table[STATE_COUNT][SYMBOL_COUNT] = {
@@ -742,13 +750,14 @@ static uint16_t ts_parse_table[STATE_COUNT][SYMBOL_COUNT] = {
   [11] = {
     [sym_parameter_declaration] = STATE(19),
     [sym_parameter_type] = STATE(20),
+    [aux_sym_param_block_repeat1] = STATE(21),
     [anon_sym_RPAREN] = ACTIONS(56),
     [anon_sym_LBRACK] = ACTIONS(58),
     [sym_user_variable] = ACTIONS(60),
     [sym_comment] = ACTIONS(20),
   },
   [12] = {
-    [sym_boolean_value] = STATE(22),
+    [sym_boolean_value] = STATE(23),
     [anon_sym_DOLLARTRUE] = ACTIONS(62),
     [anon_sym_DOLLARFALSE] = ACTIONS(62),
     [sym_comment] = ACTIONS(20),
@@ -790,56 +799,80 @@ static uint16_t ts_parse_table[STATE_COUNT][SYMBOL_COUNT] = {
   },
   [18] = {
     [anon_sym_RPAREN] = ACTIONS(92),
+    [anon_sym_LBRACK] = ACTIONS(92),
+    [sym_user_variable] = ACTIONS(94),
     [sym_comment] = ACTIONS(20),
   },
   [19] = {
-    [anon_sym_RPAREN] = ACTIONS(94),
+    [anon_sym_RPAREN] = ACTIONS(96),
+    [anon_sym_LBRACK] = ACTIONS(96),
+    [sym_user_variable] = ACTIONS(98),
     [sym_comment] = ACTIONS(20),
   },
   [20] = {
-    [sym_user_variable] = ACTIONS(96),
+    [sym_user_variable] = ACTIONS(100),
     [sym_comment] = ACTIONS(20),
   },
   [21] = {
-    [anon_sym_RPAREN] = ACTIONS(26),
+    [sym_parameter_declaration] = STATE(19),
+    [sym_parameter_type] = STATE(20),
+    [aux_sym_param_block_repeat1] = STATE(28),
+    [anon_sym_RPAREN] = ACTIONS(102),
+    [anon_sym_LBRACK] = ACTIONS(58),
+    [sym_user_variable] = ACTIONS(60),
     [sym_comment] = ACTIONS(20),
   },
   [22] = {
-    [anon_sym_RPAREN] = ACTIONS(98),
+    [anon_sym_RPAREN] = ACTIONS(26),
     [sym_comment] = ACTIONS(20),
   },
   [23] = {
-    [ts_builtin_sym_end] = ACTIONS(100),
+    [anon_sym_RPAREN] = ACTIONS(104),
     [sym_comment] = ACTIONS(20),
   },
   [24] = {
-    [anon_sym_RBRACK] = ACTIONS(102),
+    [ts_builtin_sym_end] = ACTIONS(106),
     [sym_comment] = ACTIONS(20),
   },
   [25] = {
-    [anon_sym_if] = ACTIONS(104),
-    [anon_sym_DOLLARTRUE] = ACTIONS(106),
-    [anon_sym_DOLLARFALSE] = ACTIONS(106),
-    [sym_user_variable] = ACTIONS(108),
-    [sym_number] = ACTIONS(106),
+    [anon_sym_RBRACK] = ACTIONS(108),
     [sym_comment] = ACTIONS(20),
   },
   [26] = {
     [anon_sym_RPAREN] = ACTIONS(110),
+    [anon_sym_LBRACK] = ACTIONS(110),
+    [sym_user_variable] = ACTIONS(112),
     [sym_comment] = ACTIONS(20),
   },
   [27] = {
-    [ts_builtin_sym_end] = ACTIONS(112),
-    [anon_sym_if] = ACTIONS(112),
-    [sym_signature_block] = ACTIONS(114),
-    [anon_sym_DOLLARTRUE] = ACTIONS(114),
-    [anon_sym_DOLLARFALSE] = ACTIONS(114),
-    [sym_user_variable] = ACTIONS(116),
-    [sym_number] = ACTIONS(114),
-    [sym_comment] = ACTIONS(32),
+    [anon_sym_if] = ACTIONS(114),
+    [anon_sym_DOLLARTRUE] = ACTIONS(116),
+    [anon_sym_DOLLARFALSE] = ACTIONS(116),
+    [sym_user_variable] = ACTIONS(118),
+    [sym_number] = ACTIONS(116),
+    [sym_comment] = ACTIONS(20),
   },
   [28] = {
-    [sym_user_variable] = ACTIONS(118),
+    [sym_parameter_declaration] = STATE(19),
+    [sym_parameter_type] = STATE(20),
+    [aux_sym_param_block_repeat1] = STATE(28),
+    [anon_sym_RPAREN] = ACTIONS(120),
+    [anon_sym_LBRACK] = ACTIONS(122),
+    [sym_user_variable] = ACTIONS(125),
+    [sym_comment] = ACTIONS(20),
+  },
+  [29] = {
+    [ts_builtin_sym_end] = ACTIONS(128),
+    [anon_sym_if] = ACTIONS(128),
+    [sym_signature_block] = ACTIONS(130),
+    [anon_sym_DOLLARTRUE] = ACTIONS(130),
+    [anon_sym_DOLLARFALSE] = ACTIONS(130),
+    [sym_user_variable] = ACTIONS(132),
+    [sym_number] = ACTIONS(130),
+    [sym_comment] = ACTIONS(32),
+  },
+  [30] = {
+    [sym_user_variable] = ACTIONS(134),
     [sym_comment] = ACTIONS(20),
   },
 };
@@ -876,9 +909,9 @@ static TSParseActionEntry ts_parse_actions[] = {
   [56] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, SHIFT(16),
   [58] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, SHIFT(17),
   [60] = {.count = 1, .reusable = true, .depends_on_lookahead = true}, SHIFT(18),
-  [62] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, SHIFT(21),
+  [62] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, SHIFT(22),
   [64] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, REDUCE(sym_script, 2),
-  [66] = {.count = 1, .reusable = true, .depends_on_lookahead = true}, SHIFT(23),
+  [66] = {.count = 1, .reusable = true, .depends_on_lookahead = true}, SHIFT(24),
   [68] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, REDUCE(aux_sym_script_block_repeat1, 2),
   [70] = {.count = 2, .reusable = true, .depends_on_lookahead = false}, REDUCE(aux_sym_script_block_repeat1, 2), SHIFT_REPEAT(3),
   [73] = {.count = 1, .reusable = true, .depends_on_lookahead = true}, REDUCE(aux_sym_script_block_repeat1, 2),
@@ -888,21 +921,28 @@ static TSParseActionEntry ts_parse_actions[] = {
   [84] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, REDUCE(sym_param_block, 3),
   [86] = {.count = 1, .reusable = true, .depends_on_lookahead = true}, REDUCE(sym_param_block, 3),
   [88] = {.count = 1, .reusable = false, .depends_on_lookahead = false}, REDUCE(sym_param_block, 3),
-  [90] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, SHIFT(24),
+  [90] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, SHIFT(25),
   [92] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, REDUCE(sym_parameter_declaration, 1),
-  [94] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, SHIFT(25),
-  [96] = {.count = 1, .reusable = true, .depends_on_lookahead = true}, SHIFT(26),
-  [98] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, SHIFT(27),
-  [100] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, REDUCE(sym_script, 3),
-  [102] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, SHIFT(28),
-  [104] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, REDUCE(sym_param_block, 4),
-  [106] = {.count = 1, .reusable = true, .depends_on_lookahead = true}, REDUCE(sym_param_block, 4),
-  [108] = {.count = 1, .reusable = false, .depends_on_lookahead = false}, REDUCE(sym_param_block, 4),
+  [94] = {.count = 1, .reusable = true, .depends_on_lookahead = true}, REDUCE(sym_parameter_declaration, 1),
+  [96] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, REDUCE(aux_sym_param_block_repeat1, 1),
+  [98] = {.count = 1, .reusable = true, .depends_on_lookahead = true}, REDUCE(aux_sym_param_block_repeat1, 1),
+  [100] = {.count = 1, .reusable = true, .depends_on_lookahead = true}, SHIFT(26),
+  [102] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, SHIFT(27),
+  [104] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, SHIFT(29),
+  [106] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, REDUCE(sym_script, 3),
+  [108] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, SHIFT(30),
   [110] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, REDUCE(sym_parameter_declaration, 2),
-  [112] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, REDUCE(sym_if, 4),
-  [114] = {.count = 1, .reusable = true, .depends_on_lookahead = true}, REDUCE(sym_if, 4),
-  [116] = {.count = 1, .reusable = false, .depends_on_lookahead = false}, REDUCE(sym_if, 4),
-  [118] = {.count = 1, .reusable = true, .depends_on_lookahead = true}, REDUCE(sym_parameter_type, 3),
+  [112] = {.count = 1, .reusable = true, .depends_on_lookahead = true}, REDUCE(sym_parameter_declaration, 2),
+  [114] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, REDUCE(sym_param_block, 4),
+  [116] = {.count = 1, .reusable = true, .depends_on_lookahead = true}, REDUCE(sym_param_block, 4),
+  [118] = {.count = 1, .reusable = false, .depends_on_lookahead = false}, REDUCE(sym_param_block, 4),
+  [120] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, REDUCE(aux_sym_param_block_repeat1, 2),
+  [122] = {.count = 2, .reusable = true, .depends_on_lookahead = false}, REDUCE(aux_sym_param_block_repeat1, 2), SHIFT_REPEAT(17),
+  [125] = {.count = 2, .reusable = true, .depends_on_lookahead = true}, REDUCE(aux_sym_param_block_repeat1, 2), SHIFT_REPEAT(18),
+  [128] = {.count = 1, .reusable = true, .depends_on_lookahead = false}, REDUCE(sym_if, 4),
+  [130] = {.count = 1, .reusable = true, .depends_on_lookahead = true}, REDUCE(sym_if, 4),
+  [132] = {.count = 1, .reusable = false, .depends_on_lookahead = false}, REDUCE(sym_if, 4),
+  [134] = {.count = 1, .reusable = true, .depends_on_lookahead = true}, REDUCE(sym_parameter_type, 3),
 };
 
 #ifdef _WIN32

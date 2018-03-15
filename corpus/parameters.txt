@@ -13,7 +13,24 @@ $a
   (script_block (statement (user_variable))))
 
 ===
-Parameter
+Single parameter with type defined
+===
+
+PARAM (
+  $arg1
+)
+
+$a
+
+---
+
+(script
+  (param_block
+    (parameter_declaration (user_variable)))
+  (script_block (statement (user_variable))))
+
+===
+Single parameter with type defined
 ===
 
 PARAM (
@@ -26,6 +43,27 @@ $a
 
 (script
   (param_block
+    (parameter_declaration
+      (parameter_type (type)) (user_variable)))
+  (script_block (statement (user_variable))))
+
+===
+Multiple parameters with types
+===
+
+PARAM (
+  [string] $arg1
+  [string] $arg2
+)
+
+$a
+
+---
+
+(script
+  (param_block
+    (parameter_declaration
+      (parameter_type (type)) (user_variable))
     (parameter_declaration
       (parameter_type (type)) (user_variable)))
   (script_block (statement (user_variable))))

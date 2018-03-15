@@ -21,7 +21,7 @@ module.exports = grammar({
       ),
 
     param_block: $ =>
-      seq("PARAM", "(", optional($.parameter_declaration), ")"),
+      seq("PARAM", "(", optional(repeat($.parameter_declaration)), ")"),
 
     parameter_declaration: $ =>
       seq(optional($.parameter_type), $.user_variable),
