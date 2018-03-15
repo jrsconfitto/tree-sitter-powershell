@@ -28,10 +28,9 @@ module.exports = grammar({
         ")"
       ),
 
-    parameter_declaration: $ =>
-      seq(optional($.parameter_type), $.user_variable),
+    parameter_declaration: $ => seq(repeat($.attribute), $.user_variable),
 
-    parameter_type: $ => seq("[", $.identifier, "]"),
+    attribute: $ => seq("[", $.identifier, "]", optional(",")),
 
     script_block: $ => repeat1($.statement),
 

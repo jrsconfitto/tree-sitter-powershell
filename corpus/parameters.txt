@@ -44,7 +44,7 @@ $a
 (script
   (param_block
     (parameter_declaration
-      (parameter_type (identifier)) (user_variable)))
+      (attribute (identifier)) (user_variable)))
   (script_block (statement (user_variable))))
 
 ===
@@ -63,9 +63,9 @@ $a
 (script
   (param_block
     (parameter_declaration
-      (parameter_type (identifier)) (user_variable))
+      (attribute (identifier)) (user_variable))
     (parameter_declaration
-      (parameter_type (identifier)) (user_variable)))
+      (attribute (identifier)) (user_variable)))
   (script_block (statement (user_variable))))
 
 ===
@@ -84,7 +84,30 @@ $a
 (script
   (param_block
     (parameter_declaration
-      (parameter_type (identifier)) (user_variable))
+      (attribute (identifier)) (user_variable))
     (parameter_declaration
-      (parameter_type (identifier)) (user_variable)))
+      (attribute (identifier)) (user_variable)))
+  (script_block (statement (user_variable))))
+
+===
+Multiple parameters with multiple attributes, separated by commas
+===
+
+PARAM (
+  [Parameter]
+  [string]
+  $arg1,
+  [Parameter] [string] $arg2
+)
+
+$a
+
+---
+
+(script
+  (param_block
+    (parameter_declaration
+      (attribute (identifier)) (attribute (identifier)) (user_variable))
+    (parameter_declaration
+      (attribute (identifier)) (attribute (identifier)) (user_variable)))
   (script_block (statement (user_variable))))
