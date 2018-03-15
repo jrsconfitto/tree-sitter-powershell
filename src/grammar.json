@@ -38,8 +38,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "PARAM"
+          "type": "PATTERN",
+          "value": "[pP][aA][rR][aA][mM]"
         },
         {
           "type": "STRING",

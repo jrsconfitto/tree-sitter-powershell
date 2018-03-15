@@ -1,3 +1,12 @@
+function caseInsensitive(keyword) {
+  return new RegExp(
+    keyword
+      .split("")
+      .map(letter => `[${letter}${letter.toUpperCase()}]`)
+      .join("")
+  );
+}
+
 module.exports = grammar({
   name: "powershell",
 
@@ -22,7 +31,7 @@ module.exports = grammar({
 
     param_block: $ =>
       seq(
-        "PARAM",
+        caseInsensitive("param"),
         "(",
         optional(repeat(seq($.parameter_declaration, optional(",")))),
         ")"

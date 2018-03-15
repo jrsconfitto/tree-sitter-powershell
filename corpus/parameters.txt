@@ -13,10 +13,10 @@ $a
   (script_block (statement (user_variable))))
 
 ===
-Single parameter with type defined
+Single parameter with type defined (with lowercase too)
 ===
 
-PARAM (
+param (
   $arg1
 )
 

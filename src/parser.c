@@ -14,7 +14,7 @@
 #define MAX_ALIAS_SEQUENCE_LENGTH 0
 
 enum {
-  anon_sym_PARAM = 1,
+  aux_sym_SLASH_LBRACKpP_RBRACK_LBRACKaA_RBRACK_LBRACKrR_RBRACK_LBRACKaA_RBRACK_LBRACKmM_RBRACK_SLASH = 1,
   anon_sym_LPAREN = 2,
   anon_sym_COMMA = 3,
   anon_sym_RPAREN = 4,
@@ -43,7 +43,7 @@ enum {
 
 static const char *ts_symbol_names[] = {
   [ts_builtin_sym_end] = "END",
-  [anon_sym_PARAM] = "PARAM",
+  [aux_sym_SLASH_LBRACKpP_RBRACK_LBRACKaA_RBRACK_LBRACKrR_RBRACK_LBRACKaA_RBRACK_LBRACKmM_RBRACK_SLASH] = "/[pP][aA][rR][aA][mM]/",
   [anon_sym_LPAREN] = "(",
   [anon_sym_COMMA] = ",",
   [anon_sym_RPAREN] = ")",
@@ -75,8 +75,8 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = false,
     .named = true,
   },
-  [anon_sym_PARAM] = {
-    .visible = true,
+  [aux_sym_SLASH_LBRACKpP_RBRACK_LBRACKaA_RBRACK_LBRACKrR_RBRACK_LBRACKaA_RBRACK_LBRACKmM_RBRACK_SLASH] = {
+    .visible = false,
     .named = false,
   },
   [anon_sym_LPAREN] = {
@@ -498,10 +498,11 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
         ADVANCE(27);
       if (lookahead == '<')
         ADVANCE(30);
-      if (lookahead == 'P')
-        ADVANCE(41);
       if (lookahead == 'i')
-        ADVANCE(46);
+        ADVANCE(41);
+      if (lookahead == 'P' ||
+          lookahead == 'p')
+        ADVANCE(43);
       if (lookahead == '\t' ||
           lookahead == '\n' ||
           lookahead == '\r' ||
@@ -511,30 +512,34 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
         ADVANCE(38);
       END_STATE();
     case 41:
-      if (lookahead == 'A')
+      if (lookahead == 'f')
         ADVANCE(42);
       END_STATE();
     case 42:
-      if (lookahead == 'R')
-        ADVANCE(43);
+      ACCEPT_TOKEN(anon_sym_if);
       END_STATE();
     case 43:
-      if (lookahead == 'A')
+      if (lookahead == 'A' ||
+          lookahead == 'a')
         ADVANCE(44);
       END_STATE();
     case 44:
-      if (lookahead == 'M')
+      if (lookahead == 'R' ||
+          lookahead == 'r')
         ADVANCE(45);
       END_STATE();
     case 45:
-      ACCEPT_TOKEN(anon_sym_PARAM);
+      if (lookahead == 'A' ||
+          lookahead == 'a')
+        ADVANCE(46);
       END_STATE();
     case 46:
-      if (lookahead == 'f')
+      if (lookahead == 'M' ||
+          lookahead == 'm')
         ADVANCE(47);
       END_STATE();
     case 47:
-      ACCEPT_TOKEN(anon_sym_if);
+      ACCEPT_TOKEN(aux_sym_SLASH_LBRACKpP_RBRACK_LBRACKaA_RBRACK_LBRACKrR_RBRACK_LBRACKaA_RBRACK_LBRACKmM_RBRACK_SLASH);
       END_STATE();
     case 48:
       if (lookahead == '#')
@@ -567,7 +572,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '<')
         ADVANCE(30);
       if (lookahead == 'i')
-        ADVANCE(46);
+        ADVANCE(41);
       if (lookahead == '\t' ||
           lookahead == '\n' ||
           lookahead == '\r' ||
@@ -681,7 +686,7 @@ static uint16_t ts_parse_table[STATE_COUNT][SYMBOL_COUNT] = {
     [sym_if] = STATE(5),
     [sym_boolean_value] = STATE(5),
     [aux_sym_script_block_repeat1] = STATE(10),
-    [anon_sym_PARAM] = ACTIONS(10),
+    [aux_sym_SLASH_LBRACKpP_RBRACK_LBRACKaA_RBRACK_LBRACKrR_RBRACK_LBRACKaA_RBRACK_LBRACKmM_RBRACK_SLASH] = ACTIONS(10),
     [anon_sym_if] = ACTIONS(12),
     [anon_sym_DOLLARTRUE] = ACTIONS(14),
     [anon_sym_DOLLARFALSE] = ACTIONS(14),
