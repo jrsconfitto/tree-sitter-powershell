@@ -1,0 +1,31 @@
+===
+Empty parameters
+===
+
+PARAM ()
+
+$a
+
+---
+
+(script
+  (param_block)
+  (script_block (statement (user_variable))))
+
+===
+Parameter
+===
+
+PARAM (
+  [string] $arg1
+)
+
+$a
+
+---
+
+(script
+  (param_block
+    (parameter_declaration
+      (parameter_type (type)) (user_variable)))
+  (script_block (statement (user_variable))))
