@@ -71,7 +71,11 @@ module.exports = grammar({
     // signature-end:
     // new-line-character   # SIG # End signature block   new-line-character
 
-    boolean_value: $ => choice("$TRUE", "$FALSE"),
+    boolean_value: $ =>
+      choice(
+        seq("$"),
+        optional(caseInsensitive("TRUE"), caseInsensitive("FALSE"))
+      ),
 
     // User variables
     // Ref: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_variables?view=powershell-6
