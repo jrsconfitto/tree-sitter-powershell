@@ -121,7 +121,14 @@ $true
 Parameter with attributes, one with multiple arguments
 ===
 
-param( [Parameter(ParameterSetName="p1", Position=0)] [DateTime] $d)
+param(
+  [Parameter(ParameterSetName="p1", Position=0)]
+  [DateTime]
+  $d,
+  [Parameter(ParameterSetName="p1", Position=0)]
+  [DateTime]
+  $e
+)
 
 $true
 
@@ -129,6 +136,13 @@ $true
 
 (script
   (param_block
+    (parameter_declaration
+      (attribute (identifier)
+        (attribute_arguments
+          (attribute_argument (identifier) (string))
+          (attribute_argument (identifier) (number))))
+      (attribute (identifier))
+      (user_variable))
     (parameter_declaration
       (attribute (identifier)
         (attribute_arguments
