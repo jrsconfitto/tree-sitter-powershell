@@ -16,28 +16,24 @@ $a
 Single parameter with type defined (with lowercase too)
 ===
 
-param (
-  $arg1
-)
+param ($arg1)
 
-$a
+$true
 
 ---
 
 (script
   (param_block
     (parameter_declaration (user_variable)))
-  (script_block (statement (user_variable))))
+  (script_block (statement (boolean_value))))
 
 ===
 Single parameter with type defined
 ===
 
-PARAM (
-  [string] $arg1
-)
+PARAM ([string] $arg1)
 
-$a
+$true
 
 ---
 
@@ -45,16 +41,13 @@ $a
   (param_block
     (parameter_declaration
       (attribute (identifier)) (user_variable)))
-  (script_block (statement (user_variable))))
+  (script_block (statement (boolean_value))))
 
 ===
 Multiple parameters with types
 ===
 
-PARAM (
-  [string] $arg1
-  [string] $arg2
-)
+PARAM ([string] $arg1, [string] $arg2)
 
 $a
 
@@ -72,10 +65,7 @@ $a
 Multiple parameters with types, separated by commas
 ===
 
-PARAM (
-  [string] $arg1,
-  [string] $arg2
-)
+PARAM ([string] $arg1, [string] $arg2)
 
 $a
 
@@ -93,12 +83,7 @@ $a
 Multiple parameters with multiple attributes, separated by commas
 ===
 
-PARAM (
-  [Parameter]
-  [string]
-  $arg1,
-  [Parameter] [string] $arg2
-)
+PARAM ([Parameter] [string] $arg1, [Parameter] [string] $arg2)
 
 $a
 
@@ -111,3 +96,44 @@ $a
     (parameter_declaration
       (attribute (identifier)) (attribute (identifier)) (user_variable)))
   (script_block (statement (user_variable))))
+
+===
+Parameter with attributes, one with argument
+===
+
+param( [Parameter(ParameterSetName="p1")] [DateTime] $d )
+
+$true
+
+---
+
+(script
+  (param_block
+    (parameter_declaration
+      (attribute (identifier)
+        (attribute_arguments
+          (attribute_argument (identifier) (string))))
+      (attribute (identifier))
+      (user_variable)))
+  (script_block (statement (boolean_value))))
+
+===
+Parameter with attributes, one with multiple arguments
+===
+
+param( [Parameter(ParameterSetName="p1", Position=0)] [DateTime] $d)
+
+$true
+
+---
+
+(script
+  (param_block
+    (parameter_declaration
+      (attribute (identifier)
+        (attribute_arguments
+          (attribute_argument (identifier) (string))
+          (attribute_argument (identifier) (number))))
+      (attribute (identifier))
+      (user_variable)))
+  (script_block (statement (boolean_value))))

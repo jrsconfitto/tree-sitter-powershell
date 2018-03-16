@@ -24,13 +24,24 @@ module.exports = grammar({
       seq(
         caseInsensitive("param"),
         "(",
-        optional(repeat(seq($.parameter_declaration, optional(",")))),
+        commaSep($.parameter_declaration),
         ")"
       ),
 
     parameter_declaration: $ => seq(repeat($.attribute), $.user_variable),
 
-    attribute: $ => seq("[", $.identifier, "]", optional(",")),
+    attribute: $ =>
+      seq(
+        "[",
+        $.identifier, // Attribute name
+        optional($.attribute_arguments),
+        "]"
+      ),
+
+    attribute_arguments: $ => seq("(", commaSep($.attribute_argument), ")"),
+
+    attribute_argument: $ =>
+      seq($.identifier, optional(seq("=", choice($.string, $.identifier, $.number)))),
 
     script_block: $ => repeat1($.statement),
 
