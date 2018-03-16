@@ -72,14 +72,16 @@ module.exports = grammar({
     // new-line-character   # SIG # End signature block   new-line-character
 
     boolean_value: $ =>
-      choice(
-        seq("$"),
-        optional(caseInsensitive("TRUE"), caseInsensitive("FALSE"))
+      prec(
+        1,
+        token(
+          seq("$", choice(caseInsensitive("true"), caseInsensitive("false")))
+        )
       ),
 
     // User variables
     // Ref: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_variables?view=powershell-6
-    user_variable: $ => /\$[a-zA-Z]\w*/,
+    user_variable: $ => prec(2, /\$[a-zA-Z]\w*/),
 
     // TODO: General identifier for now
     identifier: $ => /[a-zA-Z]\w*/,
