@@ -141,3 +141,14 @@ function caseInsensitive(keyword) {
       .join("")
   );
 }
+
+// Ref: tree-sitter/tree-sitter-javascript's grammar
+// Describes 1 or more rules that are separated by commas
+function commaSep1(rule) {
+  return seq(rule, repeat(seq(",", rule)));
+}
+
+// Describes 0 or more rules that are separated by commas
+function commaSep(rule) {
+  return optional(commaSep1(rule));
+}
