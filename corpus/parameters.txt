@@ -44,7 +44,7 @@ $true
   (script_block (statement (boolean_value))))
 
 ===
-Multiple parameters with types
+Multiple parameters with attributes
 ===
 
 PARAM ([string] $arg1, [string] $arg2)
@@ -62,10 +62,13 @@ $a
   (script_block (statement (user_variable))))
 
 ===
-Multiple parameters with types, separated by commas
+Multiple parameters with attributes, separated by commas
 ===
 
-PARAM ([string] $arg1, [string] $arg2)
+PARAM (
+  [string] $arg1,
+  [string] $arg2
+)
 
 $a
 
@@ -83,7 +86,15 @@ $a
 Multiple parameters with multiple attributes, separated by commas
 ===
 
-PARAM ([Parameter] [string] $arg1, [Parameter] [string] $arg2)
+PARAM (
+  [Parameter]
+  [string]
+  $arg1,
+
+  [Parameter]
+  [string]
+  $arg2
+)
 
 $a
 
@@ -101,7 +112,11 @@ $a
 Parameter with attributes, one with argument
 ===
 
-param( [Parameter(ParameterSetName="p1")] [DateTime] $d )
+param(
+  [Parameter(ParameterSetName="p1")]
+  [DateTime]
+  $d
+)
 
 $true
 
@@ -124,10 +139,7 @@ Parameter with attributes, one with multiple arguments
 param(
   [Parameter(ParameterSetName="p1", Position=0)]
   [DateTime]
-  $d,
-  [Parameter(ParameterSetName="p1", Position=0)]
-  [DateTime]
-  $e
+  $d
 )
 
 $true
@@ -136,13 +148,6 @@ $true
 
 (script
   (param_block
-    (parameter_declaration
-      (attribute (identifier)
-        (attribute_arguments
-          (attribute_argument (identifier) (string))
-          (attribute_argument (identifier) (number))))
-      (attribute (identifier))
-      (user_variable))
     (parameter_declaration
       (attribute (identifier)
         (attribute_arguments
