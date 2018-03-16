@@ -90,6 +90,15 @@ module.exports = grammar({
     // Ref: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables?view=powershell-6
     // automatic_variable: "",
 
+    // From tree-sitter-javascript:
+    string: $ =>
+      token(
+        choice(
+          seq('"', repeat(choice(/[^\\"\n]/, /\\(.|\n)/)), '"'),
+          seq("'", repeat(choice(/[^\\'\n]/, /\\(.|\n)/)), "'")
+        )
+      ),
+
     // Ref: https://github.com/tree-sitter/tree-sitter-javascript/blob/e2d88fff88f6452c61cb26edc709b0563f137427/grammar.js#L765
     number: $ => {
       const hex_literal = seq(choice("0x", "0X"), /[\da-fA-F]+/);
