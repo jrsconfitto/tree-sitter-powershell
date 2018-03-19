@@ -52,7 +52,7 @@ module.exports = grammar({
     /*
      * Script block
      */
-    script_block: $ => repeat($.statement),
+    script_block: $ => repeat1($.statement),
 
     statement: $ => choice($.if, $.user_variable, $.boolean_value, $.number),
 

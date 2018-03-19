@@ -267,10 +267,6 @@
         }
       ]
     },
-    "signature_block": {
-      "type": "STRING",
-      "value": "# SIG"
-    },
     "boolean_value": {
       "type": "PREC",
       "value": 1,
@@ -708,6 +704,10 @@
           }
         ]
       }
+    },
+    "signature_block": {
+      "type": "STRING",
+      "value": "# SIG"
     }
   },
   "extras": [
