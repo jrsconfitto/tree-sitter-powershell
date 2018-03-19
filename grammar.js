@@ -20,6 +20,9 @@ module.exports = grammar({
         optional($.signature_block)
       ),
 
+    /*
+     * Parameters
+     */
     param_block: $ =>
       seq(
         caseInsensitive("param"),
@@ -41,13 +44,19 @@ module.exports = grammar({
     attribute_arguments: $ => seq("(", commaSep($.attribute_argument), ")"),
 
     attribute_argument: $ =>
-      seq($.identifier, optional(seq("=", choice($.string, $.identifier, $.number)))),
+      seq(
+        $.identifier,
+        optional(seq("=", choice($.string, $.identifier, $.number)))
+      ),
 
-    script_block: $ => repeat1($.statement),
+    /*
+     * Script block
+     */
+    script_block: $ => repeat($.statement),
 
     statement: $ => choice($.if, $.user_variable, $.boolean_value, $.number),
 
-    // // TODO: pipeline
+    // TODO: pipeline
     if: $ => seq("if", "(", $.boolean_value, ")"),
 
     //
@@ -71,7 +80,6 @@ module.exports = grammar({
     //  // TODO: consider an underscore to hide this in the syntax tree
     // input_element: $ =>
     //   repeat(choice($.comment, $.token)),
-
 
     // signature-begin   signature   signature-end
     // signature-begin:
