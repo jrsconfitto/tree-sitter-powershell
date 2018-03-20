@@ -246,6 +246,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "do"
+        },
+        {
+          "type": "SYMBOL",
           "name": "user_variable"
         },
         {
@@ -305,6 +309,44 @@
         {
           "type": "SYMBOL",
           "name": "statement_block"
+        }
+      ]
+    },
+    "do": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[dD][oO]"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "statement_block"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[wW][hH][iI][lL][eE]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[uU][nN][tT][iI][lL]"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "boolean_value"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
         }
       ]
     },

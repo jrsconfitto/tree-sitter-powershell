@@ -36,3 +36,31 @@ while ($true) { $a }
   (script_block
     (statement
       (while (boolean_value) (statement_block (statement (user_variable)))))))
+
+===
+do while
+===
+
+do { $a } while ($true)
+
+---
+
+(script
+  (script_block
+    (statement
+      (do (statement_block (statement (user_variable)))
+        (boolean_value)))))
+
+===
+do until
+===
+
+do { $a } until ($true)
+
+---
+
+(script
+  (script_block
+    (statement
+      (do (statement_block (statement (user_variable)))
+        (boolean_value)))))
