@@ -8,7 +8,7 @@ module.exports = grammar({
      * > The top-most level of a PowerShell program is a script
      * - Windows PowerShell Language Spec 3.0
      *
-     * Based on Windows PowerShell Language Specification 3.0
+     * Based on Windows PowerShell Language Specification 3.0 (as best as i can handle given what i know)
      * input:
      *    input-elementsopt   signature-blockopt
      */
