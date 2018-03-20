@@ -36,9 +36,9 @@ if ($true) { $a } else {}
   (script_block
     (statement
       (if (boolean_value)
-        (statement_block (statement (user_variable))))
-        (else statement_block) )))
-        
+        (statement_block (statement (user_variable)))
+      (else (statement_block))))))
+
 ===
 while 1
 ===
