@@ -79,6 +79,24 @@ module.exports = grammar({
         ")"
       ),
 
+    for: $ =>
+      seq(
+        caseInsensitive("for"),
+        optional(statement),
+        optional(statement),
+        optional(statement),
+        $.statement_block
+      ),
+
+    foreach: $ =>
+      seq(
+        caseInsensitive("for"),
+        optional(statement),
+        optional(statement),
+        optional(statement),
+        $.statement_block
+      ),
+
     statement_block: $ => seq("{", repeat($.statement), "}"),
 
     //
