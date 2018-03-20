@@ -1,0 +1,24 @@
+===
+if 1
+===
+
+if ($true) {}
+
+---
+
+(script
+  (script_block
+    (statement (if (boolean_value)))))
+
+===
+if 2
+===
+
+if ($true) { $a }
+
+---
+
+(script
+  (script_block
+    (statement
+      (if (boolean_value) (statement (user_variable))))))

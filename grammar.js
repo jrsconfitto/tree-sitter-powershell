@@ -56,8 +56,17 @@ module.exports = grammar({
 
     statement: $ => choice($.if, $.user_variable, $.boolean_value, $.number),
 
-    // TODO: pipeline
-    if: $ => seq("if", "(", $.boolean_value, ")"),
+    // TODO: pipeline should go in between the parens there
+    if: $ =>
+      seq(
+        caseInsensitive("if"),
+        "(",
+        $.boolean_value,
+        ")",
+        "{",
+        repeat($.statement),
+        "}"
+      ),
 
     //
     // expression: $ => choice($.boolean_value, $.logical_expression),
