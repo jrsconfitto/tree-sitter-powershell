@@ -22,3 +22,18 @@ if ($true) { $a }
   (script_block
     (statement
       (if (boolean_value) (statement (user_variable))))))
+
+===
+while 1
+===
+
+while ($true) {
+  $a
+}
+
+---
+
+(script
+  (script_block
+    (statement
+      (while (boolean_value) (statement (user_variable))))))
