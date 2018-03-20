@@ -17,8 +17,16 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "script_block"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "script_block"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "CHOICE",
@@ -234,6 +242,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "while"
+        },
+        {
+          "type": "SYMBOL",
           "name": "user_variable"
         },
         {
@@ -252,6 +264,42 @@
         {
           "type": "PATTERN",
           "value": "[iI][fF]"
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "boolean_value"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        },
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "statement"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "while": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[wW][hH][iI][lL][eE]"
         },
         {
           "type": "STRING",

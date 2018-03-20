@@ -27,9 +27,7 @@ if ($true) { $a }
 while 1
 ===
 
-while ($true) {
-  $a
-}
+while ($true) { $a }
 
 ---
 
