@@ -1,4 +1,12 @@
 ===
+Blank script
+===
+
+---
+
+(script)
+
+===
 General script
 ===
 
