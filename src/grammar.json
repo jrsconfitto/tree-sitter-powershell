@@ -360,13 +360,35 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "SYMBOL",
-            "name": "statement"
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "statement"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "statement_terminator"
+              }
+            ]
           }
         },
         {
           "type": "STRING",
           "value": "}"
+        }
+      ]
+    },
+    "statement_terminator": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": ";"
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\r|\\r\\n\\|\\r"
         }
       ]
     },

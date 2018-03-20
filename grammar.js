@@ -81,6 +81,9 @@ module.exports = grammar({
 
     statement_block: $ => seq("{", repeat($.statement), "}"),
 
+    // Not used for now
+    statement_terminator: $ => choice(";", /\r|\r\n\|\r/),
+
     //
     // expression: $ => choice($.boolean_value, $.logical_expression),
     //
