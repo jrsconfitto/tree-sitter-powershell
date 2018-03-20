@@ -25,6 +25,21 @@ if ($true) { $a }
         (statement_block (statement (user_variable)))))))
 
 ===
+if else
+===
+
+if ($true) { $a } else {}
+
+---
+
+(script
+  (script_block
+    (statement
+      (if (boolean_value)
+        (statement_block (statement (user_variable))))
+        (else statement_block) )))
+        
+===
 while 1
 ===
 
