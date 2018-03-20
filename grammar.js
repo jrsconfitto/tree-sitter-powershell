@@ -15,7 +15,6 @@ module.exports = grammar({
     script: $ =>
       seq(
         optional($.param_block),
-        // optional($.)
         choice($.script_block, blank()),
         optional($.signature_block)
       ),
