@@ -8,7 +8,7 @@ if ($true) {}
 
 (script
   (script_block
-    (statement (if (boolean_value)))))
+    (statement (if (boolean_value) (statement_block)))))
 
 ===
 if 2
@@ -21,7 +21,8 @@ if ($true) { $a }
 (script
   (script_block
     (statement
-      (if (boolean_value) (statement (user_variable))))))
+      (if (boolean_value)
+        (statement_block (statement (user_variable)))))))
 
 ===
 while 1
@@ -34,4 +35,4 @@ while ($true) { $a }
 (script
   (script_block
     (statement
-      (while (boolean_value) (statement (user_variable))))))
+      (while (boolean_value) (statement_block (statement (user_variable)))))))
