@@ -79,3 +79,37 @@ do { $a } until ($true)
     (statement
       (do (statement_block (statement (user_variable)))
         (boolean_value)))))
+
+===
+try catch finally (from spec 3.0)
+===
+
+try
+	{
+		# $a[$i] = 10
+		"Assignment completed without error"
+		# break
+	}
+	catch #[IndexOutOfRangeException]
+	{
+		# "Handling out-of-bounds index, >$_<`n"
+		$i # = 5
+	}
+	catch
+	{
+		"Caught unexpected exception"
+	}
+	finally
+	{
+ 		# …
+	}
+
+---
+
+(script
+  (script_block
+    (statement
+      (try (statement_block (comment) (statement (string)) (comment))
+        (catch (comment) (statement_block (comment) (statement (user_variable)) (comment)))
+        (catch (statement_block (statement (string))))
+        (finally (statement_block (comment)))))))

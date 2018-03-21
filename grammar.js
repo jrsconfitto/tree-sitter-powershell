@@ -54,7 +54,16 @@ module.exports = grammar({
     script_block: $ => repeat1($.statement),
 
     statement: $ =>
-      choice($.if, $.while, $.do, $.user_variable, $.boolean_value, $.number),
+      choice(
+        $.if,
+        $.while,
+        $.do,
+        $.try,
+        $.user_variable,
+        $.boolean_value,
+        $.number,
+        $.string
+      ),
 
     // TODO: pipeline should go in between the parens there
     if: $ =>
@@ -90,6 +99,16 @@ module.exports = grammar({
         $.boolean_value,
         ")"
       ),
+
+    try: $ =>
+      seq("try", $.statement_block, repeat($.catch), optional($.finally)),
+
+    catch: $ => seq("catch", /*$.catch_type_list,*/ $.statement_block),
+
+    finally: $ => seq("finally", $.statement_block),
+
+    // TODO:
+    // catch_type_list: $ =
 
     statement_block: $ => seq("{", repeat($.statement), "}"),
 
