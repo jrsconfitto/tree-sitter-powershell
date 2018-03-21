@@ -119,14 +119,32 @@ module.exports = grammar({
 
     finally: $ => seq("finally", $.statement_block),
 
-    // TODO: can be followed by labels, values, etc.
+    /*
+     * From spec 3.0:
+     *
+     * flow-control-statement:
+     *    break   label-expressionopt
+     *    continue   label-expressionopt
+     *    throw    pipelineopt
+     *    return   pipelineopt
+     *    exit   pipelineopt
+     *
+     * label-expression:
+     *    simple-name
+     *    unary-expression
+     */
     flow_control_statement: $ =>
       choice(
-        caseInsensitive("break"),
-        caseInsensitive("continue"),
-        caseInsensitive("return"),
+        $.flow_break_continue,
+        caseInsensitive("return"), // TODO: these last three can be followed by expressions
         caseInsensitive("throw"),
         caseInsensitive("exit")
+      ),
+
+    flow_break_continue: $ =>
+      seq(
+        choice(caseInsensitive("break"), caseInsensitive("continue")),
+        optional($.identifier)
       ),
 
     // TODO:

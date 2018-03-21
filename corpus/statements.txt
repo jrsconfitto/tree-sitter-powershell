@@ -120,9 +120,13 @@ break
 
 if ($true) {
   $a
-  break
+  break james
 }
 
+if ($true) {
+  $a
+  continue james
+}
 ---
 
 
@@ -132,4 +136,9 @@ if ($true) {
       (if (boolean_value)
         (statement_block
           (statement (user_variable))
-          (statement (flow_control_statement)))))))
+          (statement (flow_control_statement (flow_break_continue (identifier)))))))
+    (statement
+      (if (boolean_value)
+        (statement_block
+          (statement (user_variable))
+          (statement (flow_control_statement (flow_break_continue (identifier)))))))))
