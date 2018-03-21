@@ -81,6 +81,36 @@ do { $a } until ($true)
         (boolean_value)))))
 
 ===
+for
+===
+
+for (
+  $a
+  $b
+  $c
+)
+{
+  $a
+}
+
+---
+
+(script
+  (script_block
+    (statement
+      (for
+        (statement user_variable)
+        (statement user_variable)
+        (statement user_variable)
+        (statement_block (user_variable))))))
+
+===
+foreach
+===
+
+---
+
+===
 try catch finally (from spec 3.0)
 ===
 

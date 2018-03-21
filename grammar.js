@@ -68,6 +68,8 @@ module.exports = grammar({
         $.if,
         $.while,
         $.do,
+        $.for,
+        $.foreach,
         $.try,
         $.flow_control_statement,
         $.user_variable,
@@ -114,18 +116,18 @@ module.exports = grammar({
     for: $ =>
       seq(
         caseInsensitive("for"),
-        optional(statement),
-        optional(statement),
-        optional(statement),
+        optional($.statement),
+        optional($.statement),
+        optional($.statement),
         $.statement_block
       ),
 
     foreach: $ =>
       seq(
-        caseInsensitive("for"),
-        optional(statement),
-        optional(statement),
-        optional(statement),
+        caseInsensitive("foreach"),
+        optional($.statement),
+        optional($.statement),
+        optional($.statement),
         $.statement_block
       ),
 
