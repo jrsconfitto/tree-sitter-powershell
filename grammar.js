@@ -40,6 +40,16 @@ module.exports = grammar({
         "]"
       ),
 
+    // TODO: will need to handle:
+    //   [int]
+    //   [int[,,,]]
+    //   [Dictionary[int,string]]
+    /*type_literal: $ => seq(
+      '[',
+      $.identifier,
+      ']'
+    ),*/
+
     attribute_arguments: $ => seq("(", commaSep($.attribute_argument), ")"),
 
     attribute_argument: $ =>
@@ -54,11 +64,33 @@ module.exports = grammar({
     script_block: $ => repeat1($.statement),
 
     statement: $ =>
-      choice($.if, $.while, $.do, $.user_variable, $.boolean_value, $.number),
+      choice(
+        $.if,
+        $.while,
+        $.do,
+        $.try,
+        $.flow_control_statement,
+        $.user_variable,
+        $.boolean_value,
+        $.number,
+        $.string
+      ),
 
     // TODO: pipeline should go in between the parens there
     if: $ =>
-      seq(caseInsensitive("if"), "(", $.boolean_value, ")", $.statement_block),
+      seq(
+        caseInsensitive("if"),
+        "(",
+        $.boolean_value,
+        ")",
+        $.statement_block,
+        repeat($.elseif),
+        optional($.else)
+      ),
+
+    elseif: $ => seq(caseInsensitive("elseif"), $.statement_block),
+
+    else: $ => seq(caseInsensitive("else"), $.statement_block),
 
     while: $ =>
       seq(
@@ -97,7 +129,49 @@ module.exports = grammar({
         $.statement_block
       ),
 
+    try: $ =>
+      seq("try", $.statement_block, repeat($.catch), optional($.finally)),
+
+    // TODO: catch type list may need type_literal
+    catch: $ => seq("catch", repeat($.attribute), $.statement_block),
+
+    finally: $ => seq("finally", $.statement_block),
+
+    /*
+     * From spec 3.0:
+     *
+     * flow-control-statement:
+     *    break   label-expressionopt
+     *    continue   label-expressionopt
+     *    throw    pipelineopt
+     *    return   pipelineopt
+     *    exit   pipelineopt
+     *
+     * label-expression:
+     *    simple-name
+     *    unary-expression
+     */
+    flow_control_statement: $ =>
+      choice(
+        $.flow_break_continue,
+        caseInsensitive("return"), // TODO: these last three can be followed by expressions
+        caseInsensitive("throw"),
+        caseInsensitive("exit")
+      ),
+
+    flow_break_continue: $ =>
+      seq(
+        choice(caseInsensitive("break"), caseInsensitive("continue")),
+        optional($.identifier)
+      ),
+
+    // TODO:
+    // catch_type_list: $ =
+
     statement_block: $ => seq("{", repeat($.statement), "}"),
+
+    // Not used for now
+    statement_terminator: $ => choice(";", /\r|\r\n\|\r/),
 
     //
     // expression: $ => choice($.boolean_value, $.logical_expression),
