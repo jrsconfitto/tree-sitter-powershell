@@ -443,6 +443,13 @@
           "value": "catch"
         },
         {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "attribute"
+          }
+        },
+        {
           "type": "SYMBOL",
           "name": "statement_block"
         }

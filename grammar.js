@@ -40,6 +40,16 @@ module.exports = grammar({
         "]"
       ),
 
+    // TODO: will need to handle:
+    //   [int]
+    //   [int[,,,]]
+    //   [Dictionary[int,string]]
+    /*type_literal: $ => seq(
+      '[',
+      $.identifier,
+      ']'
+    ),*/
+
     attribute_arguments: $ => seq("(", commaSep($.attribute_argument), ")"),
 
     attribute_argument: $ =>
@@ -103,7 +113,8 @@ module.exports = grammar({
     try: $ =>
       seq("try", $.statement_block, repeat($.catch), optional($.finally)),
 
-    catch: $ => seq("catch", /*$.catch_type_list,*/ $.statement_block),
+    // TODO: catch type list may need type_literal
+    catch: $ => seq("catch", repeat($.attribute), $.statement_block),
 
     finally: $ => seq("finally", $.statement_block),
 

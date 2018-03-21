@@ -90,7 +90,7 @@ try
 		"Assignment completed without error"
 		# break
 	}
-	catch #[IndexOutOfRangeException]
+	catch [IndexOutOfRangeException]
 	{
 		# "Handling out-of-bounds index, >$_<`n"
 		$i # = 5
@@ -110,6 +110,6 @@ try
   (script_block
     (statement
       (try (statement_block (comment) (statement (string)) (comment))
-        (catch (comment) (statement_block (comment) (statement (user_variable)) (comment)))
+        (catch (attribute (identifier)) (statement_block (comment) (statement (user_variable)) (comment)))
         (catch (statement_block (statement (string))))
         (finally (statement_block (comment)))))))
