@@ -69,6 +69,7 @@ module.exports = grammar({
         $.while,
         $.do,
         $.try,
+        $.flow_control_statement,
         $.user_variable,
         $.boolean_value,
         $.number,
@@ -117,6 +118,16 @@ module.exports = grammar({
     catch: $ => seq("catch", repeat($.attribute), $.statement_block),
 
     finally: $ => seq("finally", $.statement_block),
+
+    // TODO: can be followed by labels, values, etc.
+    flow_control_statement: $ =>
+      choice(
+        caseInsensitive("break"),
+        caseInsensitive("continue"),
+        caseInsensitive("return"),
+        caseInsensitive("throw"),
+        caseInsensitive("exit")
+      ),
 
     // TODO:
     // catch_type_list: $ =

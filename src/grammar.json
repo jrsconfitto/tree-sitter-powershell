@@ -254,6 +254,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "flow_control_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "user_variable"
         },
         {
@@ -465,6 +469,31 @@
         {
           "type": "SYMBOL",
           "name": "statement_block"
+        }
+      ]
+    },
+    "flow_control_statement": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[bB][rR][eE][aA][kK]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[cC][oO][nN][tT][iI][nN][uU][eE]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[rR][eE][tT][uU][rR][nN]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[tT][hH][rR][oO][wW]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[eE][xX][iI][tT]"
         }
       ]
     },

@@ -113,3 +113,23 @@ try
         (catch (attribute (identifier)) (statement_block (comment) (statement (user_variable)) (comment)))
         (catch (statement_block (statement (string))))
         (finally (statement_block (comment)))))))
+
+===
+break
+===
+
+if ($true) {
+  $a
+  break
+}
+
+---
+
+
+(script
+  (script_block
+    (statement
+      (if (boolean_value)
+        (statement_block
+          (statement (user_variable))
+          (statement (flow_control_statement)))))))
