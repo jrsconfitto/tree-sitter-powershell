@@ -199,9 +199,14 @@ module.exports = grammar({
         caseInsensitive("switch"),
         repeat($.switch_parameter), // these are optional
         $.switch_condition,
-        $.statement_block
+        $.switch_body
       ),
 
+    // TODO: write a function that supports the following:
+    //
+    // A switch-parameter may be abbreviated; any distinct leading part of a
+    // parameter may be used. For example, -regex, -rege, -reg, -re, and -r
+    // are equivalent.
     switch_parameter: $ =>
       seq(
         "-",
@@ -215,6 +220,13 @@ module.exports = grammar({
       ),
 
     switch_condition: $ => seq("(", $.boolean_value, ")"),
+
+    switch_body: $ => seq("{", repeat($.switch_clause), "}"),
+
+    switch_clause: $ => seq($.switch_clause_condition, $.statement_block),
+
+    // TODO: needs improvement!
+    switch_clause_condition: $ => $.identifier,
 
     // TODO:
     // catch_type_list: $ =
@@ -322,9 +334,41 @@ function caseInsensitive(keyword) {
   return new RegExp(
     keyword
       .split("")
-      .map(letter => `[${letter}${letter.toUpperCase()}]`)
+      .map(letter => `[${letter.toLowerCase()}${letter.toUpperCase()}]`)
       .join("")
   );
+}
+
+// Returns a regex that matches the full keyword or any number of characters from the start of the keyword
+function wholeOrPart(keyword) {
+  // Divide the keyword into all its parts
+  var keywordParts = [];
+  for (var i = 1; i <= keyword.length; i++) {
+    keywordParts.push(keyword.substr(0, i));
+  }
+
+  // Return a regex for all of them
+  // return new RegExp(keywordParts.reduce((acc, curr) => `${acc}|${curr}`, ""));
+  return keywordParts.reduce((acc, curr) => `${acc}|${curr}`, "");
+}
+
+function wholeOrPartCaseInsensitive(keyword) {
+  function caseI(keyword) {
+    return keyword
+      .split("")
+      .map(letter => `[${letter.toLowerCase()}${letter.toUpperCase()}]`)
+      .join("")
+  }
+
+  // Divide the keyword into all its parts
+  var keywordParts = [];
+  for (var i = 1; i <= keyword.length; i++) {
+    keywordParts.push(caseI(keyword.substr(0, i)));
+  }
+
+  // Return a regex for all of them
+  // return new RegExp(keywordParts.reduce((acc, curr) => `${acc}|${curr}`, ""));
+  return keywordParts.reduce((acc, curr) => `${acc}|${curr}`, "");
 }
 
 // Ref: tree-sitter/tree-sitter-javascript's grammar
