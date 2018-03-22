@@ -1,0 +1,35 @@
+===
+type literal (only used in traps right now!)
+===
+
+trap [int] {}
+
+---
+
+(script
+  (script_block
+    (statement (trap (type_literal (identifier)) (statement_block)))))
+
+===
+type literal with array declaration
+===
+
+trap [int[]] {}
+
+---
+
+(script
+  (script_block
+    (statement (trap (type_literal (identifier) (array_declaration)) (statement_block)))))
+
+===
+type literal with multi-deminesion array declaration
+===
+
+trap [int[,,]] {}
+
+---
+
+(script
+  (script_block
+    (statement (trap (type_literal (identifier) (array_declaration)) (statement_block)))))

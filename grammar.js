@@ -44,11 +44,16 @@ module.exports = grammar({
     //   [int]
     //   [int[,,,]]
     //   [Dictionary[int,string]]
-    type_literal: $ => seq(
-      '[',
-      $.identifier,
-      ']'
-    ),
+    type_literal: $ =>
+      seq(
+        "[",
+        $.identifier,
+        optional(choice($.array_declaration, $.type_literal)),
+        "]"
+      ),
+
+    // TODO: is this a reasonable name
+    array_declaration: $ => seq("[", optional(repeat(",")), "]"),
 
     attribute_arguments: $ => seq("(", commaSep($.attribute_argument), ")"),
 
