@@ -44,11 +44,11 @@ module.exports = grammar({
     //   [int]
     //   [int[,,,]]
     //   [Dictionary[int,string]]
-    /*type_literal: $ => seq(
+    type_literal: $ => seq(
       '[',
       $.identifier,
       ']'
-    ),*/
+    ),
 
     attribute_arguments: $ => seq("(", commaSep($.attribute_argument), ")"),
 
@@ -71,6 +71,7 @@ module.exports = grammar({
         $.for,
         $.foreach,
         $.try,
+        $.trap,
         $.flow_control_statement,
         $.user_variable,
         $.boolean_value,
@@ -145,6 +146,8 @@ module.exports = grammar({
     catch: $ => seq("catch", repeat($.attribute), $.statement_block),
 
     finally: $ => seq("finally", $.statement_block),
+
+    trap: $ => seq("trap", optional($.type_literal), $.statement_block),
 
     /*
      * From spec 3.0:

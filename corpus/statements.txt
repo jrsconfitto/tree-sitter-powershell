@@ -217,6 +217,37 @@ try
         (finally (statement_block (comment)))))))
 
 ===
+trap
+===
+
+trap { $j }
+
+---
+
+(script
+  (script_block
+    (statement (trap (statement_block (statement (user_variable)))))))
+
+===
+trap with type literal
+===
+
+trap
+[Exception]
+{
+  $j
+}
+
+---
+
+(script
+  (script_block
+    (statement
+      (trap (type_literal (identifier))
+        (statement_block
+          (statement (user_variable)))))))
+
+===
 break
 ===
 
