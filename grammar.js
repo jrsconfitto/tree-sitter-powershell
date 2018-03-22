@@ -147,16 +147,24 @@ module.exports = grammar({
     foreach_parameter: $ => seq("-", caseInsensitive("parallel")),
 
     try: $ =>
-      seq("try", $.statement_block, repeat($.catch), optional($.finally)),
+      seq(
+        caseInsensitive("try"),
+        $.statement_block,
+        repeat($.catch),
+        optional($.finally)
+      ),
 
     // TODO: catch type list may need type_literal
-    catch: $ => seq("catch", repeat($.attribute), $.statement_block),
+    catch: $ =>
+      seq(caseInsensitive("catch"), repeat($.attribute), $.statement_block),
 
-    finally: $ => seq("finally", $.statement_block),
+    finally: $ => seq(caseInsensitive("finally"), $.statement_block),
 
-    trap: $ => seq("trap", optional($.type_literal), $.statement_block),
+    trap: $ =>
+      seq(caseInsensitive("trap"), optional($.type_literal), $.statement_block),
 
-    data: $ => seq("data", optional($.identifier), $.statement_block),
+    data: $ =>
+      seq(caseInsensitive("data"), optional($.identifier), $.statement_block),
 
     /*
      * From spec 3.0:
