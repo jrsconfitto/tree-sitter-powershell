@@ -99,16 +99,26 @@ for (
   (script_block
     (statement
       (for
-        (statement user_variable)
-        (statement user_variable)
-        (statement user_variable)
-        (statement_block (user_variable))))))
+        (statement (user_variable))
+        (statement (user_variable))
+        (statement (user_variable))
+        (statement_block (statement (user_variable)))))))
 
 ===
 foreach
 ===
 
+foreach ($a in $b) {
+  $true
+}
+
 ---
+
+(script
+  (script_block
+    (statement
+      (foreach (user_variable) (user_variable)
+        (statement_block (statement (boolean_value)))))))
 
 ===
 try catch finally (from spec 3.0)

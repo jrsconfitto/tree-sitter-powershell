@@ -116,20 +116,27 @@ module.exports = grammar({
     for: $ =>
       seq(
         caseInsensitive("for"),
-        optional($.statement),
-        optional($.statement),
-        optional($.statement),
+        "(",
+        optional(seq($.statement, optional($.statement_terminator))),
+        optional(seq($.statement, optional($.statement_terminator))),
+        optional(seq($.statement, optional($.statement_terminator))),
+        ")",
         $.statement_block
       ),
 
     foreach: $ =>
       seq(
         caseInsensitive("foreach"),
-        optional($.statement),
-        optional($.statement),
-        optional($.statement),
+        optional($.foreach_parameter),
+        "(",
+        $.user_variable,
+        caseInsensitive("in"),
+        $.user_variable, // TODO: should be a pipeline
+        ")",
         $.statement_block
       ),
+
+    foreach_parameter: $ => seq("-", caseInsensitive("parallel")),
 
     try: $ =>
       seq("try", $.statement_block, repeat($.catch), optional($.finally)),
