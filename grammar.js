@@ -78,6 +78,7 @@ module.exports = grammar({
         $.try,
         $.trap,
         $.data,
+        $.switch,
         $.flow_control_statement,
         $.user_variable,
         $.boolean_value,
@@ -184,6 +185,28 @@ module.exports = grammar({
         choice(caseInsensitive("break"), caseInsensitive("continue")),
         optional($.identifier)
       ),
+
+    switch: $ =>
+      seq(
+        caseInsensitive("switch"),
+        repeat($.switch_parameter), // these are optional
+        $.switch_condition,
+        $.statement_block
+      ),
+
+    switch_parameter: $ =>
+      seq(
+        "-",
+        choice(
+          caseInsensitive("regex"),
+          caseInsensitive("wildcard"),
+          caseInsensitive("exact"),
+          caseInsensitive("casesensitive"),
+          caseInsensitive("parallel")
+        )
+      ),
+
+    switch_condition: $ => seq("(", $.boolean_value, ")"),
 
     // TODO:
     // catch_type_list: $ =
