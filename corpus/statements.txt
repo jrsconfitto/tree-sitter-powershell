@@ -105,6 +105,26 @@ for (
         (statement_block (statement (user_variable)))))))
 
 ===
+for w/ semicolons
+===
+
+for ( $a; $b; $c)
+{
+  $a
+}
+
+---
+
+(script
+  (script_block
+    (statement
+      (for
+        (statement (user_variable)) (statement_terminator)
+        (statement (user_variable)) (statement_terminator)
+        (statement (user_variable))
+        (statement_block (statement (user_variable)))))))
+
+===
 for 2
 ===
 
