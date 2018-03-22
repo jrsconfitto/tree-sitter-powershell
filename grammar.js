@@ -119,7 +119,7 @@ module.exports = grammar({
         "(",
         optional(seq($.statement, optional($.statement_terminator))),
         optional(seq($.statement, optional($.statement_terminator))),
-        optional(seq($.statement, optional($.statement_terminator))),
+        optional($.statement),
         ")",
         $.statement_block
       ),
