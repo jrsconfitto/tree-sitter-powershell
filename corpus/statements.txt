@@ -260,8 +260,8 @@ if ($true) {
   $a
   continue james
 }
----
 
+---
 
 (script
   (script_block
@@ -275,3 +275,35 @@ if ($true) {
         (statement_block
           (statement (user_variable))
           (statement (flow_control_statement (flow_break_continue (identifier)))))))))
+
+===
+data
+===
+
+data importantInformation {
+  $a
+}
+
+---
+
+(script
+  (script_block
+    (statement
+      (data (identifier)
+        (statement_block
+          (statement (user_variable)))))))
+
+===
+data w/o name
+===
+
+data {
+  $a
+}
+
+---
+
+(script
+  (script_block
+    (statement
+      (data (statement_block (statement (user_variable)))))))

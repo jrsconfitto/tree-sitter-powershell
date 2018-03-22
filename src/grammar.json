@@ -332,6 +332,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "data"
+        },
+        {
+          "type": "SYMBOL",
           "name": "flow_control_statement"
         },
         {
@@ -712,6 +716,31 @@
             {
               "type": "SYMBOL",
               "name": "type_literal"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "statement_block"
+        }
+      ]
+    },
+    "data": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "data"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "identifier"
             },
             {
               "type": "BLANK"

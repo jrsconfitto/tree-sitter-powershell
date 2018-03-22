@@ -77,6 +77,7 @@ module.exports = grammar({
         $.foreach,
         $.try,
         $.trap,
+        $.data,
         $.flow_control_statement,
         $.user_variable,
         $.boolean_value,
@@ -153,6 +154,8 @@ module.exports = grammar({
     finally: $ => seq("finally", $.statement_block),
 
     trap: $ => seq("trap", optional($.type_literal), $.statement_block),
+
+    data: $ => seq("data", optional($.identifier), $.statement_block),
 
     /*
      * From spec 3.0:
