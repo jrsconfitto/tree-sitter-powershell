@@ -202,11 +202,6 @@ module.exports = grammar({
         $.switch_body
       ),
 
-    // TODO: write a function that supports the following:
-    //
-    // A switch-parameter may be abbreviated; any distinct leading part of a
-    // parameter may be used. For example, -regex, -rege, -reg, -re, and -r
-    // are equivalent.
     switch_parameter: $ =>
       seq(
         "-",
@@ -339,25 +334,20 @@ function caseInsensitive(keyword) {
   );
 }
 
-// Returns a regex that matches the full keyword or any number of characters from the start of the keyword
-function wholeOrPart(keyword) {
-  // Divide the keyword into all its parts
-  var keywordParts = [];
-  for (var i = 1; i <= keyword.length; i++) {
-    keywordParts.push(keyword.substr(0, i));
-  }
-
-  // Return a regex for all of them
-  // return new RegExp(keywordParts.reduce((acc, curr) => `${acc}|${curr}`, ""));
-  return keywordParts.reduce((acc, curr) => `${acc}|${curr}`, "");
-}
-
+// Returns a regex that matches the full keyword or any number of characters
+// from the start of the keyword.
+//
+// This attempts to fulfill part of the powershell spec declaring:
+//
+// > A switch-parameter may be abbreviated; any distinct leading part of a
+// > parameter may be used. For example, -regex, -rege, -reg, -re, and -r
+// > are equivalent.
 function wholeOrPartCaseInsensitive(keyword) {
   function caseI(keyword) {
     return keyword
       .split("")
       .map(letter => `[${letter.toLowerCase()}${letter.toUpperCase()}]`)
-      .join("")
+      .join("");
   }
 
   // Divide the keyword into all its parts
@@ -367,8 +357,9 @@ function wholeOrPartCaseInsensitive(keyword) {
   }
 
   // Return a regex for all of them
-  // return new RegExp(keywordParts.reduce((acc, curr) => `${acc}|${curr}`, ""));
-  return keywordParts.reduce((acc, curr) => `${acc}|${curr}`, "");
+  var wholeOrPartBase = keywordParts.reduce((acc, curr) => `${curr}|${acc}`);
+
+  return new RegExp(`(${wholeOrPartBase})\\b`);
 }
 
 // Ref: tree-sitter/tree-sitter-javascript's grammar

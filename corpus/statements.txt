@@ -330,3 +330,26 @@ switch
         (switch_parameter)
         (switch_condition (boolean_value))
         (statement_block (statement (user_variable)))))))
+
+===
+switch with short parameters
+===
+
+switch
+-r
+-p
+($true)
+{
+  $a
+}
+
+---
+
+(script
+  (script_block
+    (statement
+      (switch
+        (switch_parameter)
+        (switch_parameter)
+        (switch_condition (boolean_value))
+        (statement_block (statement (user_variable)))))))
