@@ -317,7 +317,13 @@ switch
 -parallel
 ($true)
 {
-  $a
+  a {
+    $a
+  }
+
+  b {
+    $b
+  }
 }
 
 ---
@@ -329,10 +335,14 @@ switch
         (switch_parameter)
         (switch_parameter)
         (switch_condition (boolean_value))
-        (statement_block (statement (user_variable)))))))
+        (switch_body
+          (switch_clause (switch_clause_condition (identifier))
+            (statement_block (statement (user_variable))))
+          (switch_clause (switch_clause_condition (identifier))
+            (statement_block (statement (user_variable)))))))))
 
 ===
-switch with short parameters
+switch with short parameters (failing for now while i figure out things!)
 ===
 
 switch
