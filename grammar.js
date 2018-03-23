@@ -40,10 +40,6 @@ module.exports = grammar({
         "]"
       ),
 
-    // TODO: will need to handle:
-    //   [int]
-    //   [int[,,,]]
-    //   [Dictionary[int,string]]
     type_literal: $ =>
       seq(
         "[",
@@ -52,7 +48,8 @@ module.exports = grammar({
         "]"
       ),
 
-    // TODO: is this a reasonable name
+    // TODO: will need to handle:
+    //   [Dictionary[int,string]]
     array_declaration: $ => seq("[", optional(repeat(",")), "]"),
 
     attribute_arguments: $ => seq("(", commaSep($.attribute_argument), ")"),
