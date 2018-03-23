@@ -22,13 +22,9 @@ module.exports = grammar({
     /*
      * Parameters
      */
-    param_block: $ =>
-      seq(
-        caseInsensitive("param"),
-        "(",
-        commaSep($.parameter_declaration),
-        ")"
-      ),
+    param_block: $ => seq(caseInsensitive("param"), $.parameter_list),
+
+    parameter_list: $ => seq("(", commaSep($.parameter_declaration), ")"),
 
     parameter_declaration: $ => seq(repeat($.attribute), $.user_variable),
 
@@ -67,6 +63,7 @@ module.exports = grammar({
 
     statement: $ =>
       choice(
+        $.function_definition,
         $.if,
         $.while,
         $.do,
@@ -81,6 +78,22 @@ module.exports = grammar({
         $.boolean_value,
         $.number,
         $.string
+      ),
+
+    /*
+     * Functions
+     */
+
+    // function   new-linesopt   function-name   function-parameter-declarationopt   {   script-block   }
+    // filter   new-linesopt   function-name   function-parameter-declarationopt   {   script-block   }
+    // workflow   new-linesopt   function-name   function-parameter-declarationopt   {   script-block   }
+
+    function_definition: $ =>
+      seq(
+        caseInsensitive("function"),
+        $.identifier,
+        optional($.parameter_list),
+        $.statement_block
       ),
 
     // TODO: pipeline should go in between the parens there

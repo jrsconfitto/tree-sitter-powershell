@@ -1,0 +1,15 @@
+===
+function definition
+===
+
+function james ([int] $a) {
+  $b
+}
+
+---
+
+(script
+  (script_block (statement
+    (function_definition (identifier)
+      (parameter_list (parameter_declaration (attribute (identifier)) (user_variable)))
+      (statement_block (statement (user_variable)))))))

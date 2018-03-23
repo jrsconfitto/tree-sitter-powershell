@@ -9,7 +9,7 @@ $a
 ---
 
 (script
-  (param_block)
+  (param_block (parameter_list))
   (script_block (statement (user_variable))))
 
 ===
@@ -23,8 +23,8 @@ $true
 ---
 
 (script
-  (param_block
-    (parameter_declaration (user_variable)))
+  (param_block (parameter_list
+    (parameter_declaration (user_variable))))
   (script_block (statement (boolean_value))))
 
 ===
@@ -38,9 +38,9 @@ $true
 ---
 
 (script
-  (param_block
+  (param_block (parameter_list
     (parameter_declaration
-      (attribute (identifier)) (user_variable)))
+      (attribute (identifier)) (user_variable))))
   (script_block (statement (boolean_value))))
 
 ===
@@ -55,10 +55,11 @@ $a
 
 (script
   (param_block
-    (parameter_declaration
-      (attribute (identifier)) (user_variable))
-    (parameter_declaration
-      (attribute (identifier)) (user_variable)))
+    (parameter_list
+      (parameter_declaration
+        (attribute (identifier)) (user_variable))
+      (parameter_declaration
+        (attribute (identifier)) (user_variable))))
   (script_block (statement (user_variable))))
 
 ===
@@ -76,10 +77,11 @@ $a
 
 (script
   (param_block
-    (parameter_declaration
-      (attribute (identifier)) (user_variable))
-    (parameter_declaration
-      (attribute (identifier)) (user_variable)))
+    (parameter_list
+      (parameter_declaration
+        (attribute (identifier)) (user_variable))
+      (parameter_declaration
+        (attribute (identifier)) (user_variable))))
   (script_block (statement (user_variable))))
 
 ===
@@ -102,10 +104,11 @@ $a
 
 (script
   (param_block
-    (parameter_declaration
-      (attribute (identifier)) (attribute (identifier)) (user_variable))
-    (parameter_declaration
-      (attribute (identifier)) (attribute (identifier)) (user_variable)))
+    (parameter_list
+      (parameter_declaration
+        (attribute (identifier)) (attribute (identifier)) (user_variable))
+      (parameter_declaration
+        (attribute (identifier)) (attribute (identifier)) (user_variable))))
   (script_block (statement (user_variable))))
 
 ===
@@ -124,12 +127,13 @@ $true
 
 (script
   (param_block
-    (parameter_declaration
-      (attribute (identifier)
-        (attribute_arguments
-          (attribute_argument (identifier) (string))))
-      (attribute (identifier))
-      (user_variable)))
+    (parameter_list
+      (parameter_declaration
+        (attribute (identifier)
+          (attribute_arguments
+            (attribute_argument (identifier) (string))))
+        (attribute (identifier))
+        (user_variable))))
   (script_block (statement (boolean_value))))
 
 ===
@@ -148,11 +152,12 @@ $true
 
 (script
   (param_block
-    (parameter_declaration
-      (attribute (identifier)
-        (attribute_arguments
-          (attribute_argument (identifier) (string))
-          (attribute_argument (identifier) (number))))
-      (attribute (identifier))
-      (user_variable)))
+    (parameter_list
+      (parameter_declaration
+        (attribute (identifier)
+          (attribute_arguments
+            (attribute_argument (identifier) (string))
+            (attribute_argument (identifier) (number))))
+        (attribute (identifier))
+        (user_variable))))
   (script_block (statement (boolean_value))))
