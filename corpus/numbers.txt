@@ -9,8 +9,9 @@ Decimals
 
 (script
   (script_block
-    (statement (number))
-    (statement (number))))
+    (statement_list
+      (statement (number))
+      (statement (number)))))
 
 ===
 Hex
@@ -23,5 +24,6 @@ Hex
 
 (script
   (script_block
-    (statement (number))
-    (statement (number))))
+    (statement_list
+      (statement (number))
+      (statement (number)))))

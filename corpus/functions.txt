@@ -2,14 +2,48 @@
 function definition
 ===
 
-function james ([int] $a) {
+function addOne ([int] $a) {
   $b
 }
 
 ---
 
 (script
-  (script_block (statement
-    (function_definition (identifier)
-      (parameter_list (parameter_declaration (attribute (identifier)) (user_variable)))
-      (statement_block (statement (user_variable)))))))
+  (script_block
+    (statement_list
+      (statement
+        (function_definition (identifier)
+          (parameter_list
+            (parameter_declaration (attribute (identifier)) (user_variable)))
+          (script_block
+            (statement_list (statement (user_variable)))))))))
+
+===
+function definition with parameters
+===
+
+function FuncWithParams {
+  param (
+    [int] $i,
+    [string] $j
+  )
+
+  $i
+}
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement (function_definition
+        (identifier)
+        (script_block
+          (param_block
+            (parameter_list
+              (parameter_declaration
+                (attribute (identifier)) (user_variable))
+              (parameter_declaration
+                (attribute (identifier)) (user_variable))))
+          (statement_list
+            (statement (user_variable)))))))))

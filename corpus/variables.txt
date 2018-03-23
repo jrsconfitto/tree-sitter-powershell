@@ -12,11 +12,12 @@ $c_useful
 
 (script
   (script_block
-    (statement (user_variable))
-    (statement (user_variable))
-    (statement (user_variable))
-    (statement (user_variable))
-    (statement (user_variable))))
+    (statement_list
+      (statement (user_variable))
+      (statement (user_variable))
+      (statement (user_variable))
+      (statement (user_variable))
+      (statement (user_variable)))))
 
 ===
 booleans
@@ -29,5 +30,6 @@ $FALSE
 
 (script
   (script_block
-    (statement (boolean_value))
-    (statement (boolean_value))))
+    (statement_list
+      (statement (boolean_value))
+      (statement (boolean_value)))))
