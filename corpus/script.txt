@@ -17,5 +17,6 @@ $a
 ---
 
 (script
-  (param_block)
-  (script_block (statement (user_variable))))
+  (script_block
+    (param_block (parameter_list))
+    (statement_list (statement (user_variable)))))

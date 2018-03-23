@@ -1,5 +1,5 @@
 ===
-type literal (only used in traps right now!)
+type literal
 ===
 
 trap [int] {}
@@ -8,7 +8,8 @@ trap [int] {}
 
 (script
   (script_block
-    (statement (trap (type_literal (identifier)) (statement_block)))))
+    (statement_list
+      (statement (trap (type_literal (identifier)) (statement_block))))))
 
 ===
 type literal with array declaration
@@ -20,10 +21,11 @@ trap [int[]] {}
 
 (script
   (script_block
-    (statement (trap (type_literal (identifier) (array_declaration)) (statement_block)))))
+    (statement_list
+      (statement (trap (type_literal (identifier) (array_declaration)) (statement_block))))))
 
 ===
-type literal with multi-deminesion array declaration
+type literal with multi-dimensional array declaration
 ===
 
 trap [int[,,]] {}
@@ -32,4 +34,5 @@ trap [int[,,]] {}
 
 (script
   (script_block
-    (statement (trap (type_literal (identifier) (array_declaration)) (statement_block)))))
+    (statement_list
+    (statement (trap (type_literal (identifier) (array_declaration)) (statement_block))))))

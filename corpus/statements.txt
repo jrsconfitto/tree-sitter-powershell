@@ -8,7 +8,8 @@ if ($true) {}
 
 (script
   (script_block
-    (statement (if (boolean_value) (statement_block)))))
+    (statement_list
+      (statement (if (boolean_value) (statement_block))))))
 
 ===
 if 2
@@ -20,9 +21,11 @@ if ($true) { $a }
 
 (script
   (script_block
-    (statement
-      (if (boolean_value)
-        (statement_block (statement (user_variable)))))))
+    (statement_list
+      (statement
+        (if (boolean_value)
+          (statement_block
+            (statement_list (statement (user_variable)))))))))
 
 ===
 if else
@@ -34,10 +37,12 @@ if ($true) { $a } else {}
 
 (script
   (script_block
-    (statement
-      (if (boolean_value)
-        (statement_block (statement (user_variable)))
-      (else (statement_block))))))
+    (statement_list
+      (statement
+        (if (boolean_value)
+          (statement_block
+            (statement_list (statement (user_variable))))
+        (else (statement_block)))))))
 
 ===
 while 1
@@ -49,8 +54,11 @@ while ($true) { $a }
 
 (script
   (script_block
-    (statement
-      (while (boolean_value) (statement_block (statement (user_variable)))))))
+    (statement_list
+      (statement
+        (while (boolean_value)
+          (statement_block
+            (statement_list (statement (user_variable)))))))))
 
 ===
 do while
@@ -62,9 +70,10 @@ do { $a } while ($true)
 
 (script
   (script_block
-    (statement
-      (do (statement_block (statement (user_variable)))
-        (boolean_value)))))
+    (statement_list
+      (statement
+        (do (statement_block (statement_list (statement (user_variable))))
+          (boolean_value))))))
 
 ===
 do until
@@ -76,9 +85,12 @@ do { $a } until ($true)
 
 (script
   (script_block
-    (statement
-      (do (statement_block (statement (user_variable)))
-        (boolean_value)))))
+    (statement_list
+      (statement
+        (do
+          (statement_block
+            (statement_list (statement (user_variable))))
+          (boolean_value))))))
 
 ===
 for 1
@@ -97,12 +109,13 @@ for (
 
 (script
   (script_block
-    (statement
-      (for
-        (statement (user_variable))
-        (statement (user_variable))
-        (statement (user_variable))
-        (statement_block (statement (user_variable)))))))
+    (statement_list
+      (statement
+        (for
+          (pipeline (user_variable))
+          (pipeline (user_variable))
+          (pipeline (user_variable))
+          (statement_block (statement_list (statement (user_variable)))))))))
 
 ===
 for w/ semicolons
@@ -117,12 +130,13 @@ for ( $a; $b; $c)
 
 (script
   (script_block
+    (statement_list
     (statement
       (for
-        (statement (user_variable)) (statement_terminator)
-        (statement (user_variable)) (statement_terminator)
-        (statement (user_variable))
-        (statement_block (statement (user_variable)))))))
+        (pipeline (user_variable)) (statement_terminator)
+        (pipeline (user_variable)) (statement_terminator)
+        (pipeline (user_variable))
+        (statement_block (statement_list (statement (user_variable)))))))))
 
 ===
 for 2
@@ -140,11 +154,12 @@ for (
 
 (script
   (script_block
+    (statement_list
     (statement
       (for
-        (statement (user_variable))
-        (statement (user_variable))
-        (statement_block (statement (user_variable)))))))
+        (pipeline (user_variable))
+        (pipeline (user_variable))
+        (statement_block (statement_list (statement (user_variable)))))))))
 
 ===
 for 3
@@ -161,10 +176,11 @@ for (
 
 (script
   (script_block
-    (statement
-      (for
-        (statement (user_variable))
-        (statement_block (statement (user_variable)))))))
+    (statement_list
+      (statement
+        (for
+          (pipeline (user_variable))
+          (statement_block (statement_list (statement (user_variable)))))))))
 
 ===
 foreach
@@ -178,9 +194,10 @@ foreach ($a in $b) {
 
 (script
   (script_block
-    (statement
-      (foreach (user_variable) (user_variable)
-        (statement_block (statement (boolean_value)))))))
+    (statement_list
+      (statement
+        (foreach (user_variable) (user_variable)
+          (statement_block (statement_list (statement (boolean_value)))))))))
 
 ===
 try catch finally (from spec 3.0)
@@ -210,11 +227,14 @@ try
 
 (script
   (script_block
-    (statement
-      (try (statement_block (comment) (statement (string)) (comment))
-        (catch (type_literal (identifier)) (statement_block (comment) (statement (user_variable)) (comment)))
-        (catch (statement_block (statement (string))))
-        (finally (statement_block (comment)))))))
+    (statement_list
+      (statement
+        (try
+          (statement_block (comment) (statement_list (statement (string))) (comment))
+          (catch (type_literal (identifier))
+            (statement_block (comment) (statement_list (statement (user_variable))) (comment)))
+          (catch (statement_block (statement_list (statement (string)))))
+          (finally (statement_block (comment))))))))
 
 ===
 trap
@@ -226,7 +246,11 @@ trap { $j }
 
 (script
   (script_block
-    (statement (trap (statement_block (statement (user_variable)))))))
+    (statement_list
+      (statement
+        (trap
+          (statement_block
+            (statement_list (statement (user_variable)))))))))
 
 ===
 trap with type literal
@@ -242,10 +266,12 @@ trap
 
 (script
   (script_block
-    (statement
-      (trap (type_literal (identifier))
-        (statement_block
-          (statement (user_variable)))))))
+    (statement_list
+      (statement
+        (trap
+          (type_literal (identifier))
+          (statement_block
+            (statement_list (statement (user_variable)))))))))
 
 ===
 break
@@ -265,16 +291,19 @@ if ($true) {
 
 (script
   (script_block
-    (statement
-      (if (boolean_value)
-        (statement_block
-          (statement (user_variable))
-          (statement (flow_control_statement (flow_break_continue (identifier)))))))
-    (statement
-      (if (boolean_value)
-        (statement_block
-          (statement (user_variable))
-          (statement (flow_control_statement (flow_break_continue (identifier)))))))))
+    (statement_list
+      (statement
+        (if (boolean_value)
+          (statement_block
+            (statement_list
+              (statement (user_variable))
+              (statement (flow_control_statement (flow_break_continue (identifier))))))))
+      (statement
+        (if (boolean_value)
+          (statement_block
+            (statement_list
+              (statement (user_variable))
+              (statement (flow_control_statement (flow_break_continue (identifier)))))))))))
 
 ===
 data
@@ -288,10 +317,12 @@ data importantInformation {
 
 (script
   (script_block
-    (statement
-      (data (identifier)
-        (statement_block
-          (statement (user_variable)))))))
+    (statement_list
+      (statement
+        (data (identifier)
+          (statement_block
+            (statement_list
+              (statement (user_variable)))))))))
 
 ===
 data w/o name
@@ -305,8 +336,9 @@ data {
 
 (script
   (script_block
-    (statement
-      (data (statement_block (statement (user_variable)))))))
+    (statement_list
+      (statement
+        (data (statement_block (statement_list (statement (user_variable)))))))))
 
 ===
 switch
@@ -330,16 +362,19 @@ switch
 
 (script
   (script_block
-    (statement
-      (switch
-        (switch_parameter)
-        (switch_parameter)
-        (switch_condition (boolean_value))
-        (switch_body
-          (switch_clause (switch_clause_condition (identifier))
-            (statement_block (statement (user_variable))))
-          (switch_clause (switch_clause_condition (identifier))
-            (statement_block (statement (user_variable)))))))))
+    (statement_list
+      (statement
+        (switch
+          (switch_parameter)
+          (switch_parameter)
+          (switch_condition (boolean_value))
+          (switch_body
+            (switch_clause (switch_clause_condition (identifier))
+              (statement_block
+                (statement_list (statement (user_variable)))))
+            (switch_clause (switch_clause_condition (identifier))
+              (statement_block
+                (statement_list (statement (user_variable)))))))))))
 
 ===
 switch with short parameters (failing for now while i figure out things!)
@@ -357,9 +392,10 @@ switch
 
 (script
   (script_block
-    (statement
-      (switch
-        (switch_parameter)
-        (switch_parameter)
-        (switch_condition (boolean_value))
-        (statement_block (statement (user_variable)))))))
+    (statement_list
+      (statement
+        (switch
+          (switch_parameter)
+          (switch_parameter)
+          (switch_condition (boolean_value))
+          (statement_block (statement (user_variable))))))))

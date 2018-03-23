@@ -13,22 +13,19 @@ module.exports = grammar({
      *    input-elementsopt   signature-blockopt
      */
     script: $ =>
-      seq(
-        optional($.param_block),
-        choice($.script_block, blank()),
-        optional($.signature_block)
-      ),
+      seq(choice($.script_block, blank()), optional($.signature_block)),
+
+    /*
+     * Script block
+     */
+    script_block: $ => seq(optional($.param_block), $.statement_list),
 
     /*
      * Parameters
      */
-    param_block: $ =>
-      seq(
-        caseInsensitive("param"),
-        "(",
-        commaSep($.parameter_declaration),
-        ")"
-      ),
+    param_block: $ => seq(caseInsensitive("param"), $.parameter_list),
+
+    parameter_list: $ => seq("(", commaSep($.parameter_declaration), ")"),
 
     parameter_declaration: $ => seq(repeat($.attribute), $.user_variable),
 
@@ -37,14 +34,6 @@ module.exports = grammar({
         "[",
         $.identifier, // Attribute name
         optional($.attribute_arguments),
-        "]"
-      ),
-
-    type_literal: $ =>
-      seq(
-        "[",
-        $.identifier,
-        optional(choice($.array_declaration, $.type_literal)),
         "]"
       ),
 
@@ -60,13 +49,17 @@ module.exports = grammar({
         optional(seq("=", choice($.string, $.identifier, $.number)))
       ),
 
-    /*
-     * Script block
-     */
-    script_block: $ => repeat1($.statement),
+    statement_block: $ => seq("{", optional($.statement_list), "}"),
+
+    statement_list: $ =>
+      repeat1(seq($.statement, optional($.statement_terminator))),
+
+    // Or a newline, but i'm not sure if i need to state that?
+    statement_terminator: $ => ";",
 
     statement: $ =>
       choice(
+        $.function_definition,
         $.if,
         $.while,
         $.do,
@@ -81,6 +74,35 @@ module.exports = grammar({
         $.boolean_value,
         $.number,
         $.string
+      ),
+
+    /*
+     * Pipelines
+     */
+
+    // TODO: of course this isn't right
+    pipeline: $ => choice($.boolean_value, $.user_variable),
+
+    /*
+     * Functions
+     */
+
+    // function   new-linesopt   function-name   function-parameter-declarationopt   {   script-block   }
+    // filter   new-linesopt   function-name   function-parameter-declarationopt   {   script-block   }
+    // workflow   new-linesopt   function-name   function-parameter-declarationopt   {   script-block   }
+
+    function_definition: $ =>
+      seq(
+        choice(
+          caseInsensitive("function"),
+          caseInsensitive("filter"),
+          caseInsensitive("workflow")
+        ),
+        $.identifier,
+        optional($.parameter_list),
+        "{",
+        $.script_block,
+        "}"
       ),
 
     // TODO: pipeline should go in between the parens there
@@ -122,9 +144,9 @@ module.exports = grammar({
       seq(
         caseInsensitive("for"),
         "(",
-        optional(seq($.statement, optional($.statement_terminator))),
-        optional(seq($.statement, optional($.statement_terminator))),
-        optional($.statement),
+        optional(seq($.pipeline, optional($.statement_terminator))),
+        optional(seq($.pipeline, optional($.statement_terminator))),
+        optional($.pipeline),
         ")",
         $.statement_block
       ),
@@ -222,11 +244,6 @@ module.exports = grammar({
     // TODO:
     // catch_type_list: $ =
 
-    statement_block: $ => seq("{", repeat($.statement), "}"),
-
-    // Not used for now
-    statement_terminator: $ => choice(";", /\r|\r\n\|\r/),
-
     //
     // expression: $ => choice($.boolean_value, $.logical_expression),
     //
@@ -256,6 +273,17 @@ module.exports = grammar({
     // base64 encoded signature blob in multiple single-line-comments
     // signature-end:
     // new-line-character   # SIG # End signature block   new-line-character
+
+    /*
+     * Literals
+     */
+    type_literal: $ =>
+      seq(
+        "[",
+        $.identifier,
+        optional(choice($.array_declaration, $.type_literal)),
+        "]"
+      ),
 
     boolean_value: $ =>
       prec(
