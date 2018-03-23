@@ -93,7 +93,11 @@ module.exports = grammar({
 
     function_definition: $ =>
       seq(
-        /*caseInsensitive(*/ "function" /*)*/,
+        choice(
+          caseInsensitive("function"),
+          caseInsensitive("filter"),
+          caseInsensitive("workflow")
+        ),
         $.identifier,
         optional($.parameter_list),
         "{",

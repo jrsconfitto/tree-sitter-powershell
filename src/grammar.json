@@ -407,8 +407,21 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "function"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[fF][uU][nN][cC][tT][iI][oO][nN]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[fF][iI][lL][tT][eE][rR]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[wW][oO][rR][kK][fF][lL][oO][wW]"
+            }
+          ]
         },
         {
           "type": "SYMBOL",
