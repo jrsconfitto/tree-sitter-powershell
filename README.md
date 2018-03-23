@@ -8,7 +8,9 @@ The goal of this project is to build a grammar that is useful in the Atom editor
 
 # Contributing
 
-Issues and Pull Requests are welcome! This is a side-project for fun, so please be understanding if responses take a little bit of time :smile:
+Issues and Pull Requests are welcome!
+
+This is a side-project for fun, so please be understanding if responses take a little bit of time :smile:
 
 # References
 
