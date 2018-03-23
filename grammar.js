@@ -151,9 +151,8 @@ module.exports = grammar({
         optional($.finally)
       ),
 
-    // TODO: catch type list may need type_literal
     catch: $ =>
-      seq(caseInsensitive("catch"), repeat($.attribute), $.statement_block),
+      seq(caseInsensitive("catch"), repeat($.type_literal), $.statement_block),
 
     finally: $ => seq(caseInsensitive("finally"), $.statement_block),
 

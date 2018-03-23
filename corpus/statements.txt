@@ -212,7 +212,7 @@ try
   (script_block
     (statement
       (try (statement_block (comment) (statement (string)) (comment))
-        (catch (attribute (identifier)) (statement_block (comment) (statement (user_variable)) (comment)))
+        (catch (type_literal (identifier)) (statement_block (comment) (statement (user_variable)) (comment)))
         (catch (statement_block (statement (string))))
         (finally (statement_block (comment)))))))
 
