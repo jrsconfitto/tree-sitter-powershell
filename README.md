@@ -8,7 +8,9 @@ The goal of this project is to build a grammar that is useful in the Atom editor
 
 # Contributing
 
-Issues and Pull Requests are welcome!
+Issues and Pull Requests are welcome! Feel free to ask any questions in the issues.
+
+The files you'll mainly want to work with are the [grammar.js](grammar.js) and files in the corpus folder, which are the unit tests.
 
 This is a side-project for fun, so please be understanding if responses take a little bit of time :smile:
 
