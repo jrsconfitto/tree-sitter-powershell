@@ -14,7 +14,9 @@ This is a side-project for fun, so please be understanding if responses take a l
 
 # References
 
-This grammar is (very roughly) modeled after the [Windows PowerShell Language Specification Version 3.0][spec].
+- [Learn a bit about creating tree-sitter grammars from a doc][tsdoc]
+- This grammar is (very roughly) modeled after the [Windows PowerShell Language Specification Version 3.0][spec].
 
 [tree-sitter]:https://github.com/tree-sitter/tree-sitter
+[tsdoc]:https://github.com/tree-sitter/tree-sitter/blob/10c3a956794a5e81a0a7e5c5a804e818c2dd0fe3/docs/creating-parsers.md
 [spec]:https://www.microsoft.com/en-us/download/details.aspx?id=36389
