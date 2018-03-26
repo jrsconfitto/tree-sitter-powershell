@@ -87,10 +87,6 @@ module.exports = grammar({
      * Functions
      */
 
-    // function   new-linesopt   function-name   function-parameter-declarationopt   {   script-block   }
-    // filter   new-linesopt   function-name   function-parameter-declarationopt   {   script-block   }
-    // workflow   new-linesopt   function-name   function-parameter-declarationopt   {   script-block   }
-
     function_definition: $ =>
       seq(
         choice(
