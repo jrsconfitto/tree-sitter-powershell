@@ -27,3 +27,17 @@ Hex
     (statement_list
       (statement (number))
       (statement (number)))))
+
+===
+Here strings
+===
+
+@"
+  Anything in here is now part of a string
+"@
+
+---
+
+(script
+  (script_block
+      (statement_list (statement (string)))))

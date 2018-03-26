@@ -311,7 +311,8 @@ module.exports = grammar({
       token(
         choice(
           seq('"', repeat(choice(/[^\\"\n]/, /\\(.|\n)/)), '"'),
-          seq("'", repeat(choice(/[^\\'\n]/, /\\(.|\n)/)), "'")
+          seq("'", repeat(choice(/[^\\'\n]/, /\\(.|\n)/)), "'"),
+          seq('@"', repeat(/[^(\"@)]/), /[\r|\r\n|\n]"@/)
         )
       ),
 
