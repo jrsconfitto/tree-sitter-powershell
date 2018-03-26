@@ -29,7 +29,7 @@ Hex
       (statement (number)))))
 
 ===
-Here strings
+Expandable here string
 ===
 
 @"
@@ -41,3 +41,17 @@ Here strings
 (script
   (script_block
       (statement_list (statement (string)))))
+
+===
+Verbatim here string
+===
+
+@'
+  Anything in here is now part of a string
+'@
+
+---
+
+(script
+  (script_block
+    (statement_list (statement (string)))))

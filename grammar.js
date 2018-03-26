@@ -312,7 +312,8 @@ module.exports = grammar({
         choice(
           seq('"', repeat(choice(/[^\\"\n]/, /\\(.|\n)/)), '"'),
           seq("'", repeat(choice(/[^\\'\n]/, /\\(.|\n)/)), "'"),
-          seq('@"', repeat(/[^(\"@)]/), /[\r|\r\n|\n]"@/)
+          seq('@"', repeat(/[^(\"@)]/), /[\r|\r\n|\n]"@/),
+          seq("@'", repeat(/[^(\'@)]/), /[\r|\r\n|\n]'@/)
         )
       ),
 
