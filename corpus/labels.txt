@@ -1,0 +1,12 @@
+===
+label
+===
+
+:hello while ($true) {}
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement (labeled_statement (label (identifier)) (while (boolean_value) (statement_block)))))))

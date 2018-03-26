@@ -70,6 +70,7 @@ module.exports = grammar({
         $.data,
         $.switch,
         $.flow_control_statement,
+        $.labeled_statement,
         $.user_variable,
         $.boolean_value,
         $.number,
@@ -179,6 +180,11 @@ module.exports = grammar({
 
     data: $ =>
       seq(caseInsensitive("data"), optional($.identifier), $.statement_block),
+
+    labeled_statement: $ =>
+      seq($.label, choice($.switch, $.foreach, $.for, $.while, $.do)),
+
+    label: $ => seq(":", $.identifier),
 
     /*
      * From spec 3.0:
