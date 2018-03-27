@@ -377,15 +377,17 @@ switch
                 (statement_list (statement (user_variable)))))))))))
 
 ===
-switch with short parameters (failing for now while i figure out things!)
+switch with short parameters
 ===
 
 switch
--r
+-reg
 -p
 ($true)
 {
-  $a
+  a {
+    $a
+  }
 }
 
 ---
@@ -398,4 +400,7 @@ switch
           (switch_parameter)
           (switch_parameter)
           (switch_condition (boolean_value))
-          (statement_block (statement (user_variable))))))))
+          (switch_body
+            (switch_clause (switch_clause_condition (identifier))
+              (statement_block
+                (statement_list (statement (user_variable)))))))))))

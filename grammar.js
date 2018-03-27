@@ -226,11 +226,11 @@ module.exports = grammar({
       seq(
         "-",
         choice(
-          caseInsensitive("regex"),
-          caseInsensitive("wildcard"),
-          caseInsensitive("exact"),
-          caseInsensitive("casesensitive"),
-          caseInsensitive("parallel")
+          wholeOrPartCaseInsensitive("regex"),
+          wholeOrPartCaseInsensitive("wildcard"),
+          wholeOrPartCaseInsensitive("exact"),
+          wholeOrPartCaseInsensitive("casesensitive"),
+          wholeOrPartCaseInsensitive("parallel")
         )
       ),
 
@@ -360,8 +360,8 @@ function caseInsensitive(keyword) {
   );
 }
 
-// Returns a regex that matches the full keyword or any number of characters
-// from the start of the keyword.
+// Returns a `choice` rule that matches the full keyword or any number of
+// characters from the start of the keyword.
 //
 // This attempts to fulfill part of the powershell spec declaring:
 //
@@ -369,23 +369,15 @@ function caseInsensitive(keyword) {
 // > parameter may be used. For example, -regex, -rege, -reg, -re, and -r
 // > are equivalent.
 function wholeOrPartCaseInsensitive(keyword) {
-  function caseI(keyword) {
-    return keyword
-      .split("")
-      .map(letter => `[${letter.toLowerCase()}${letter.toUpperCase()}]`)
-      .join("");
-  }
-
-  // Divide the keyword into all its parts
+  // Divide the keyword into all its parts, and assemble a collection of
+  // case insensitive RegExps that can be fed into a `choice` rule.
   var keywordParts = [];
   for (var i = 1; i <= keyword.length; i++) {
-    keywordParts.push(caseI(keyword.substr(0, i)));
+    keywordParts.push(caseInsensitive(keyword.substr(0, i)));
   }
 
-  // Return a regex for all of them
-  var wholeOrPartBase = keywordParts.reduce((acc, curr) => `${curr}|${acc}`);
-
-  return new RegExp(`(${wholeOrPartBase})\\b`);
+  // Return a choice between all possible sub-words
+  return choice(...keywordParts);
 }
 
 // Ref: tree-sitter/tree-sitter-javascript's grammar
