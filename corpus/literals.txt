@@ -55,3 +55,39 @@ Verbatim here string
 (script
   (script_block
     (statement_list (statement (string)))))
+
+===
+Long suffix
+===
+
+123.0L
+
+---
+
+(script
+  (script_block
+    (statement_list (statement (number (suffix))))))
+
+===
+Decimal suffix
+===
+
+123.0d
+
+---
+
+(script
+  (script_block
+    (statement_list (statement (number (suffix))))))
+
+===
+Multiple suffixes
+===
+
+123.0Lkb
+
+---
+
+(script
+  (script_block
+    (statement_list (statement (number (suffix) (suffix))))))
