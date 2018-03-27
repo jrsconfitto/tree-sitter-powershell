@@ -29,34 +29,6 @@ Hex
       (statement (number)))))
 
 ===
-Expandable here string
-===
-
-@"
-  Anything in here is now part of a string
-"@
-
----
-
-(script
-  (script_block
-      (statement_list (statement (string)))))
-
-===
-Verbatim here string
-===
-
-@'
-  Anything in here is now part of a string
-'@
-
----
-
-(script
-  (script_block
-    (statement_list (statement (string)))))
-
-===
 Long suffix
 ===
 
@@ -91,3 +63,31 @@ Multiple suffixes
 (script
   (script_block
     (statement_list (statement (number (suffix) (suffix))))))
+    
+===
+Expandable here string
+===
+
+@"
+  Anything in here is now part of a string
+"@
+
+---
+
+(script
+  (script_block
+      (statement_list (statement (string)))))
+
+===
+Verbatim here string
+===
+
+@'
+  Anything in here is now part of a string
+'@
+
+---
+
+(script
+  (script_block
+    (statement_list (statement (string)))))
