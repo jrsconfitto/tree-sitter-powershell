@@ -74,7 +74,8 @@ module.exports = grammar({
         $.user_variable,
         $.boolean_value,
         $.number,
-        $.string
+        $.string,
+        $.expandable_here_string
       ),
 
     /*
@@ -312,10 +313,43 @@ module.exports = grammar({
         choice(
           seq('"', repeat(choice(/[^\\"\n]/, /\\(.|\n)/)), '"'),
           seq("'", repeat(choice(/[^\\'\n]/, /\\(.|\n)/)), "'"),
-          seq('@"', repeat(/[^(\"@)]/), /[\r|\r\n|\n]"@/),
           seq("@'", repeat(/[^(\'@)]/), /[\r|\r\n|\n]'@/)
         )
       ),
+
+    expandable_here_string: $ =>
+      seq(
+        '@"',
+        repeat(choice($.expandable_string_chars, $.expandable_string_part)),
+        $.expandable_here_string_end
+      ),
+
+    // Based on tree-sitter-javascript's template string implementation.
+    // Ref: https://github.com/tree-sitter/tree-sitter-javascript/blob/e2d88fff88f6452c61cb26edc709b0563f137427/grammar.js#L723,L745
+
+    // expandable_string_literal: $ =>
+    //   seq(
+    //     repeat(choice($._expandable_string_chars, $.expandable_string_part)),
+    //   ),
+    //
+
+    expandable_here_string_end: $ => /[\r|\r\n|\n]"@/,
+
+    expandable_string_chars: $ =>
+      prec.left(
+        repeat1(
+          choice(
+            /[\r|\r\n|\n]"[^@]/, // No line start, then double-quote, then @ symbol
+            /\$[^\(]/ // Any dollar not followed by an open paren
+          )
+        )
+      ),
+
+    // /\$[^{`$]/, // Any dollar not followed by a brace, backtick, or dollar
+    // /\\[`$]/ // Any backslash followed by a backtick or dollar
+    // "$"
+
+    expandable_string_part: $ => seq("$", "(", $.statement, ")"),
 
     // Ref: https://github.com/tree-sitter/tree-sitter-javascript/blob/e2d88fff88f6452c61cb26edc709b0563f137427/grammar.js#L765
     number: $ => {
