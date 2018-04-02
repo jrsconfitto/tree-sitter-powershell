@@ -63,7 +63,7 @@ Multiple suffixes
 (script
   (script_block
     (statement_list (statement (number (suffix) (suffix))))))
-    
+
 ===
 Expandable here string
 ===
@@ -91,3 +91,18 @@ Verbatim here string
 (script
   (script_block
     (statement_list (statement (string)))))
+
+===
+Expandable here string with expandable string part
+===
+
+@"
+  Anything in here is now part of a string except $($true) which
+  is something else
+"@
+
+---
+
+(script
+  (script_block
+      (statement_list (statement (string)))))
