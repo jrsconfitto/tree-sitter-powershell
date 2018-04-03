@@ -311,7 +311,9 @@ module.exports = grammar({
       token(
         choice(
           seq('"', repeat(choice(/[^\\"\n]/, /\\(.|\n)/)), '"'),
-          seq("'", repeat(choice(/[^\\'\n]/, /\\(.|\n)/)), "'")
+          seq("'", repeat(choice(/[^\\'\n]/, /\\(.|\n)/)), "'"),
+          seq('@"', repeat(/[^(\"@)]/), /[\r|\r\n|\n]"@/),
+          seq("@'", repeat(/[^(\'@)]/), /[\r|\r\n|\n]'@/)
         )
       ),
 
@@ -339,8 +341,19 @@ module.exports = grammar({
         seq(decimal_integer_literal, optional(exponent_part))
       );
 
-      return token(choice(hex_literal, decimal_literal));
+      return seq(token(choice(hex_literal, decimal_literal)), repeat($.suffix));
     },
+
+    suffix: $ =>
+      choice(
+        caseInsensitive("l"),  // Long
+        caseInsensitive("d"),  // Decimal
+        caseInsensitive("kb"), // kilobyte
+        caseInsensitive("mb"), // megabyte
+        caseInsensitive("gb"), // gigabyte
+        caseInsensitive("tb"), // terabyte
+        caseInsensitive("pb")  // petabyte
+      ),
 
     // Ref: https://github.com/tree-sitter/tree-sitter-javascript/blob/e2d88fff88f6452c61cb26edc709b0563f137427/grammar.js#L708
     // Ref: https://stackoverflow.com/questions/13014947/regex-to-match-a-c-style-multiline-comment/36328890#36328890
