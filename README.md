@@ -1,5 +1,9 @@
 # tree-sitter-powershell
 
+[![Build Status](https://travis-ci.org/jrsconfitto/tree-sitter-powershell.svg?branch=master)](https://travis-ci.org/jrsconfitto/tree-sitter-powershell)
+
+[![Build status](https://ci.appveyor.com/api/projects/status/1xjovq67kgq36hfc/branch/master?svg=true)](https://ci.appveyor.com/project/jugglingnutcase/tree-sitter-powershell/branch/master)
+
 A [tree-sitter] grammar for the PowerShell language.
 
 *This is still very much a WIP* and isn't something i'd recommend depending on!
