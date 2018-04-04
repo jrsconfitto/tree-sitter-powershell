@@ -1,7 +1,5 @@
 # Tree sitter
 build
-src/grammar.json
-src/parser.c
 
 # Logs
 logs
