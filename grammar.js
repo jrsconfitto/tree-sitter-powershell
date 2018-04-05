@@ -346,13 +346,13 @@ module.exports = grammar({
 
     suffix: $ =>
       choice(
-        caseInsensitive("l"),  // Long
-        caseInsensitive("d"),  // Decimal
+        caseInsensitive("l"), // Long
+        caseInsensitive("d"), // Decimal
         caseInsensitive("kb"), // kilobyte
         caseInsensitive("mb"), // megabyte
         caseInsensitive("gb"), // gigabyte
         caseInsensitive("tb"), // terabyte
-        caseInsensitive("pb")  // petabyte
+        caseInsensitive("pb") // petabyte
       ),
 
     // Ref: https://github.com/tree-sitter/tree-sitter-javascript/blob/e2d88fff88f6452c61cb26edc709b0563f137427/grammar.js#L708
