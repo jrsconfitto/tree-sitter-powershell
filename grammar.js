@@ -317,37 +317,25 @@ module.exports = grammar({
         )
       ),
 
+    // Based on tree-sitter-javascript's template string implementation.
+    // Ref: https://github.com/tree-sitter/tree-sitter-javascript/blob/e2d88fff88f6452c61cb26edc709b0563f137427/grammar.js#L723,L745
     expandable_here_string: $ =>
       seq(
         '@"',
         repeat(choice($.expandable_string_chars, $.expandable_string_part)),
-        $.expandable_here_string_end
+        '"@' // TODO: is a newline before the here string close still required?
       ),
 
-    // Based on tree-sitter-javascript's template string implementation.
-    // Ref: https://github.com/tree-sitter/tree-sitter-javascript/blob/e2d88fff88f6452c61cb26edc709b0563f137427/grammar.js#L723,L745
-
-    // expandable_string_literal: $ =>
-    //   seq(
-    //     repeat(choice($._expandable_string_chars, $.expandable_string_part)),
-    //   ),
-    //
-
-    expandable_here_string_end: $ => /[\r|\r\n|\n]"@/,
-
     expandable_string_chars: $ =>
-      prec.left(
+      token(
         repeat1(
           choice(
-            /[\r|\r\n|\n]"[^@]/, // No line start, then double-quote, then @ symbol
-            /\$[^\(]/ // Any dollar not followed by an open paren
+            /[^"@$]/, // Any character that's not a double quote, @ symbol (is this correct?), or $, is a valid here string character
+            /\$[^(]/, // Or any dollar not followed by an open paren (also valid in a here string?)
+            /"[^@]/ // Any double-quote not followed by a @. This isn't completely correct, i think the newline is required before the quote!
           )
         )
       ),
-
-    // /\$[^{`$]/, // Any dollar not followed by a brace, backtick, or dollar
-    // /\\[`$]/ // Any backslash followed by a backtick or dollar
-    // "$"
 
     expandable_string_part: $ => seq("$", "(", $.statement, ")"),
 

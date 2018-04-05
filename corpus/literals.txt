@@ -76,7 +76,7 @@ Expandable here string
 
 (script
   (script_block
-      (statement_list (statement (string)))))
+      (statement_list (statement (expandable_here_string (expandable_string_chars))))))
 
 ===
 Verbatim here string
@@ -105,4 +105,9 @@ Expandable here string with expandable string part
 
 (script
   (script_block
-      (statement_list (statement (string)))))
+      (statement_list
+        (statement
+          (expandable_here_string
+            (expandable_string_chars)
+            (expandable_string_part (statement (boolean_value)))
+            (expandable_string_chars))))))
