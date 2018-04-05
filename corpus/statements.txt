@@ -25,7 +25,7 @@ if ($true) { $a }
       (statement
         (if (boolean_value)
           (statement_block
-            (statement_list (statement (user_variable)))))))))
+            (statement_list (statement (variable)))))))))
 
 ===
 if else
@@ -41,7 +41,7 @@ if ($true) { $a } else {}
       (statement
         (if (boolean_value)
           (statement_block
-            (statement_list (statement (user_variable))))
+            (statement_list (statement (variable))))
         (else (statement_block)))))))
 
 ===
@@ -58,7 +58,7 @@ while ($true) { $a }
       (statement
         (while (boolean_value)
           (statement_block
-            (statement_list (statement (user_variable)))))))))
+            (statement_list (statement (variable)))))))))
 
 ===
 do while
@@ -72,7 +72,7 @@ do { $a } while ($true)
   (script_block
     (statement_list
       (statement
-        (do (statement_block (statement_list (statement (user_variable))))
+        (do (statement_block (statement_list (statement (variable))))
           (boolean_value))))))
 
 ===
@@ -89,7 +89,7 @@ do { $a } until ($true)
       (statement
         (do
           (statement_block
-            (statement_list (statement (user_variable))))
+            (statement_list (statement (variable))))
           (boolean_value))))))
 
 ===
@@ -112,10 +112,10 @@ for (
     (statement_list
       (statement
         (for
-          (pipeline (user_variable))
-          (pipeline (user_variable))
-          (pipeline (user_variable))
-          (statement_block (statement_list (statement (user_variable)))))))))
+          (pipeline (variable))
+          (pipeline (variable))
+          (pipeline (variable))
+          (statement_block (statement_list (statement (variable)))))))))
 
 ===
 for w/ semicolons
@@ -133,10 +133,10 @@ for ( $a; $b; $c)
     (statement_list
     (statement
       (for
-        (pipeline (user_variable)) (statement_terminator)
-        (pipeline (user_variable)) (statement_terminator)
-        (pipeline (user_variable))
-        (statement_block (statement_list (statement (user_variable)))))))))
+        (pipeline (variable)) (statement_terminator)
+        (pipeline (variable)) (statement_terminator)
+        (pipeline (variable))
+        (statement_block (statement_list (statement (variable)))))))))
 
 ===
 for 2
@@ -157,9 +157,9 @@ for (
     (statement_list
     (statement
       (for
-        (pipeline (user_variable))
-        (pipeline (user_variable))
-        (statement_block (statement_list (statement (user_variable)))))))))
+        (pipeline (variable))
+        (pipeline (variable))
+        (statement_block (statement_list (statement (variable)))))))))
 
 ===
 for 3
@@ -179,8 +179,8 @@ for (
     (statement_list
       (statement
         (for
-          (pipeline (user_variable))
-          (statement_block (statement_list (statement (user_variable)))))))))
+          (pipeline (variable))
+          (statement_block (statement_list (statement (variable)))))))))
 
 ===
 foreach
@@ -196,7 +196,7 @@ foreach ($a in $b) {
   (script_block
     (statement_list
       (statement
-        (foreach (user_variable) (user_variable)
+        (foreach (variable) (variable)
           (statement_block (statement_list (statement (boolean_value)))))))))
 
 ===
@@ -232,7 +232,7 @@ try
         (try
           (statement_block (comment) (statement_list (statement (string))) (comment))
           (catch (type_literal (identifier))
-            (statement_block (comment) (statement_list (statement (user_variable))) (comment)))
+            (statement_block (comment) (statement_list (statement (variable))) (comment)))
           (catch (statement_block (statement_list (statement (string)))))
           (finally (statement_block (comment))))))))
 
@@ -250,7 +250,7 @@ trap { $j }
       (statement
         (trap
           (statement_block
-            (statement_list (statement (user_variable)))))))))
+            (statement_list (statement (variable)))))))))
 
 ===
 trap with type literal
@@ -271,7 +271,7 @@ trap
         (trap
           (type_literal (identifier))
           (statement_block
-            (statement_list (statement (user_variable)))))))))
+            (statement_list (statement (variable)))))))))
 
 ===
 break
@@ -296,13 +296,13 @@ if ($true) {
         (if (boolean_value)
           (statement_block
             (statement_list
-              (statement (user_variable))
+              (statement (variable))
               (statement (flow_control_statement (flow_break_continue (identifier))))))))
       (statement
         (if (boolean_value)
           (statement_block
             (statement_list
-              (statement (user_variable))
+              (statement (variable))
               (statement (flow_control_statement (flow_break_continue (identifier)))))))))))
 
 ===
@@ -322,7 +322,7 @@ data importantInformation {
         (data (identifier)
           (statement_block
             (statement_list
-              (statement (user_variable)))))))))
+              (statement (variable)))))))))
 
 ===
 data w/o name
@@ -338,7 +338,7 @@ data {
   (script_block
     (statement_list
       (statement
-        (data (statement_block (statement_list (statement (user_variable)))))))))
+        (data (statement_block (statement_list (statement (variable)))))))))
 
 ===
 switch
@@ -371,10 +371,10 @@ switch
           (switch_body
             (switch_clause (switch_clause_condition (identifier))
               (statement_block
-                (statement_list (statement (user_variable)))))
+                (statement_list (statement (variable)))))
             (switch_clause (switch_clause_condition (identifier))
               (statement_block
-                (statement_list (statement (user_variable)))))))))))
+                (statement_list (statement (variable)))))))))))
 
 ===
 switch with short parameters
@@ -403,4 +403,4 @@ switch
           (switch_body
             (switch_clause (switch_clause_condition (identifier))
               (statement_block
-                (statement_list (statement (user_variable)))))))))))
+                (statement_list (statement (variable)))))))))))

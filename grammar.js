@@ -27,7 +27,7 @@ module.exports = grammar({
 
     parameter_list: $ => seq("(", commaSep($.parameter_declaration), ")"),
 
-    parameter_declaration: $ => seq(repeat($.attribute), $.user_variable),
+    parameter_declaration: $ => seq(repeat($.attribute), $.variable),
 
     attribute: $ =>
       seq(
@@ -71,7 +71,7 @@ module.exports = grammar({
         $.switch,
         $.flow_control_statement,
         $.labeled_statement,
-        $.user_variable,
+        $.variable,
         $.boolean_value,
         $.number,
         $.string,
@@ -83,7 +83,7 @@ module.exports = grammar({
      */
 
     // TODO: of course this isn't right
-    pipeline: $ => choice($.boolean_value, $.user_variable),
+    pipeline: $ => choice($.boolean_value, $.variable),
 
     /*
      * Functions
@@ -154,9 +154,9 @@ module.exports = grammar({
         caseInsensitive("foreach"),
         optional($.foreach_parameter),
         "(",
-        $.user_variable,
+        $.variable,
         caseInsensitive("in"),
-        $.user_variable, // TODO: should be a pipeline
+        $.variable, // TODO: should be a pipeline
         ")",
         $.statement_block
       ),
@@ -298,7 +298,7 @@ module.exports = grammar({
 
     // User variables
     // Ref: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_variables?view=powershell-6
-    user_variable: $ => prec(2, /\$[a-zA-Z]\w*/),
+    variable: $ => prec(2, /\$[a-zA-Z]\w*/),
 
     // TODO: General identifier for now
     identifier: $ => /[a-zA-Z]\w*/,

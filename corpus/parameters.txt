@@ -12,7 +12,7 @@ $a
   (script_block
     (param_block (parameter_list))
     (statement_list
-      (statement (user_variable)))))
+      (statement (variable)))))
 
 ===
 Single parameter with type defined (with lowercase too)
@@ -27,7 +27,7 @@ $true
 (script
   (script_block
   (param_block
-    (parameter_list (parameter_declaration (user_variable))))
+    (parameter_list (parameter_declaration (variable))))
   (statement_list
      (statement (boolean_value)))))
 
@@ -45,7 +45,7 @@ $true
   (script_block
     (param_block (parameter_list
       (parameter_declaration
-        (attribute (identifier)) (user_variable))))
+        (attribute (identifier)) (variable))))
   (statement_list
     (statement (boolean_value)))))
 
@@ -64,10 +64,10 @@ $a
     (param_block
       (parameter_list
         (parameter_declaration
-          (attribute (identifier)) (user_variable))
+          (attribute (identifier)) (variable))
         (parameter_declaration
-          (attribute (identifier)) (user_variable))))
-    (statement_list (statement (user_variable)))))
+          (attribute (identifier)) (variable))))
+    (statement_list (statement (variable)))))
 
 ===
 Multiple parameters with attributes, separated by commas
@@ -87,10 +87,10 @@ $a
     (param_block
       (parameter_list
         (parameter_declaration
-          (attribute (identifier)) (user_variable))
+          (attribute (identifier)) (variable))
         (parameter_declaration
-          (attribute (identifier)) (user_variable))))
-    (statement_list (statement (user_variable)))))
+          (attribute (identifier)) (variable))))
+    (statement_list (statement (variable)))))
 
 ===
 Multiple parameters with multiple attributes, separated by commas
@@ -115,10 +115,10 @@ $a
     (param_block
       (parameter_list
         (parameter_declaration
-          (attribute (identifier)) (attribute (identifier)) (user_variable))
+          (attribute (identifier)) (attribute (identifier)) (variable))
         (parameter_declaration
-          (attribute (identifier)) (attribute (identifier)) (user_variable))))
-    (statement_list (statement (user_variable)))))
+          (attribute (identifier)) (attribute (identifier)) (variable))))
+    (statement_list (statement (variable)))))
 
 ===
 Parameter with attributes, one with argument
@@ -143,7 +143,7 @@ $true
             (attribute_arguments
               (attribute_argument (identifier) (string))))
           (attribute (identifier))
-          (user_variable))))
+          (variable))))
     (statement_list (statement (boolean_value)))))
 
 ===
@@ -170,5 +170,5 @@ $true
               (attribute_argument (identifier) (string))
               (attribute_argument (identifier) (number))))
           (attribute (identifier))
-          (user_variable))))
+          (variable))))
     (statement_list (statement (boolean_value)))))

@@ -13,11 +13,11 @@ $c_useful
 (script
   (script_block
     (statement_list
-      (statement (user_variable))
-      (statement (user_variable))
-      (statement (user_variable))
-      (statement (user_variable))
-      (statement (user_variable)))))
+      (statement (variable))
+      (statement (variable))
+      (statement (variable))
+      (statement (variable))
+      (statement (variable)))))
 
 ===
 booleans

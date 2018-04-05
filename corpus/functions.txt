@@ -14,9 +14,9 @@ function addOne ([int] $a) {
       (statement
         (function_definition (identifier)
           (parameter_list
-            (parameter_declaration (attribute (identifier)) (user_variable)))
+            (parameter_declaration (attribute (identifier)) (variable)))
           (script_block
-            (statement_list (statement (user_variable)))))))))
+            (statement_list (statement (variable)))))))))
 
 ===
 filter definition
@@ -34,9 +34,9 @@ filter addOne ([int] $a) {
       (statement
         (function_definition (identifier)
           (parameter_list
-            (parameter_declaration (attribute (identifier)) (user_variable)))
+            (parameter_declaration (attribute (identifier)) (variable)))
           (script_block
-            (statement_list (statement (user_variable)))))))))
+            (statement_list (statement (variable)))))))))
 
 ===
 workflow definition
@@ -54,9 +54,9 @@ workflow addOne ([int] $a) {
       (statement
         (function_definition (identifier)
           (parameter_list
-            (parameter_declaration (attribute (identifier)) (user_variable)))
+            (parameter_declaration (attribute (identifier)) (variable)))
           (script_block
-            (statement_list (statement (user_variable)))))))))
+            (statement_list (statement (variable)))))))))
 
 ===
 function definition with parameters
@@ -82,8 +82,8 @@ function FuncWithParams {
           (param_block
             (parameter_list
               (parameter_declaration
-                (attribute (identifier)) (user_variable))
+                (attribute (identifier)) (variable))
               (parameter_declaration
-                (attribute (identifier)) (user_variable))))
+                (attribute (identifier)) (variable))))
           (statement_list
-            (statement (user_variable)))))))))
+            (statement (variable)))))))))

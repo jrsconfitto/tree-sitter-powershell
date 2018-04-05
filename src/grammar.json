@@ -122,7 +122,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "user_variable"
+          "name": "variable"
         }
       ]
     },
@@ -378,7 +378,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "user_variable"
+          "name": "variable"
         },
         {
           "type": "SYMBOL",
@@ -407,7 +407,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "user_variable"
+          "name": "variable"
         }
       ]
     },
@@ -710,7 +710,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "user_variable"
+          "name": "variable"
         },
         {
           "type": "PATTERN",
@@ -718,7 +718,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "user_variable"
+          "name": "variable"
         },
         {
           "type": "STRING",
@@ -1296,7 +1296,7 @@
         }
       }
     },
-    "user_variable": {
+    "variable": {
       "type": "PREC",
       "value": 2,
       "content": {
