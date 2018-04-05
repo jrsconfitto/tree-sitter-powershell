@@ -185,6 +185,7 @@ module.exports = grammar({
     labeled_statement: $ =>
       seq($.label, choice($.switch, $.foreach, $.for, $.while, $.do)),
 
+    // Left associate labels because they are similar to scopes in variables
     label: $ => seq(":", $.identifier),
 
     /*
@@ -298,10 +299,36 @@ module.exports = grammar({
 
     // User variables
     // Ref: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_variables?view=powershell-6
-    variable: $ => prec(2, /\$[a-zA-Z]\w*/),
+    variable: $ =>
+      prec(
+        2,
+        choice(
+          "$$",
+          "$?",
+          "$^",
+          seq("$", optional($.variable_scope), repeat1($.identifier)),
+          seq("${", optional($.variable_scope), repeat1($.identifier), "}")
+        )
+      ),
+
+    variable_scope: $ =>
+      seq(
+        choice(
+          "global",
+          "local",
+          "private",
+          "script",
+          "using",
+          "workflow",
+          $.variable_characters
+        ),
+        ":"
+      ),
+
+    variable_characters: $ => prec(3, repeat1(choice(/[a-zA-Z]\w*/, "_", "?"))),
 
     // TODO: General identifier for now
-    identifier: $ => /[a-zA-Z]\w*/,
+    identifier: $ => prec(4, /[a-zA-Z]\w*/),
 
     // Automatic variables
     // Ref: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables?view=powershell-6

@@ -1300,13 +1300,156 @@
       "type": "PREC",
       "value": 2,
       "content": {
-        "type": "PATTERN",
-        "value": "\\$[a-zA-Z]\\w*"
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "$$"
+          },
+          {
+            "type": "STRING",
+            "value": "$?"
+          },
+          {
+            "type": "STRING",
+            "value": "$^"
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "$"
+              },
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "variable_scope"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              },
+              {
+                "type": "REPEAT1",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                }
+              }
+            ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "${"
+              },
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "variable_scope"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              },
+              {
+                "type": "REPEAT1",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                }
+              },
+              {
+                "type": "STRING",
+                "value": "}"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "variable_scope": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "global"
+            },
+            {
+              "type": "STRING",
+              "value": "local"
+            },
+            {
+              "type": "STRING",
+              "value": "private"
+            },
+            {
+              "type": "STRING",
+              "value": "script"
+            },
+            {
+              "type": "STRING",
+              "value": "using"
+            },
+            {
+              "type": "STRING",
+              "value": "workflow"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "variable_characters"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        }
+      ]
+    },
+    "variable_characters": {
+      "type": "PREC",
+      "value": 3,
+      "content": {
+        "type": "REPEAT1",
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[a-zA-Z]\\w*"
+            },
+            {
+              "type": "STRING",
+              "value": "_"
+            },
+            {
+              "type": "STRING",
+              "value": "?"
+            }
+          ]
+        }
       }
     },
     "identifier": {
-      "type": "PATTERN",
-      "value": "[a-zA-Z]\\w*"
+      "type": "PREC",
+      "value": 4,
+      "content": {
+        "type": "PATTERN",
+        "value": "[a-zA-Z]\\w*"
+      }
     },
     "string": {
       "type": "TOKEN",

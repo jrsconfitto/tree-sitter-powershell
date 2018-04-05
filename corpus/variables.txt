@@ -1,5 +1,22 @@
 ===
-$variables
+Pre-defined variables
+===
+
+$$
+$?
+$^
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement (variable))
+      (statement (variable))
+      (statement (variable)))))
+
+===
+variables with identifiers
 ===
 
 $a
@@ -13,11 +30,11 @@ $c_useful
 (script
   (script_block
     (statement_list
-      (statement (variable))
-      (statement (variable))
-      (statement (variable))
-      (statement (variable))
-      (statement (variable)))))
+      (statement (variable (identifier)))
+      (statement (variable (identifier)))
+      (statement (variable (identifier)))
+      (statement (variable (identifier)))
+      (statement (variable (identifier))))))
 
 ===
 booleans
@@ -33,3 +50,20 @@ $FALSE
     (statement_list
       (statement (boolean_value))
       (statement (boolean_value)))))
+
+===
+Scoped variable
+===
+
+$local:james
+$private:hidden
+$global:shout_it_out
+
+---
+
+(script
+  (script_block
+    (statement_list
+      (statement (variable (variable_scope) (identifier)))
+      (statement (variable (variable_scope) (identifier)))
+      (statement (variable (variable_scope) (identifier))))))
