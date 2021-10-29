@@ -1,3 +1,7 @@
+# NOTE
+
+There's an official repo of a Tree Sitter implementation for PowerShell, please direct any efforts there rather than in this repo: https://github.com/powershell/tree-sitter-powershell.
+
 # tree-sitter-powershell
 
 [![Build Status](https://travis-ci.org/jrsconfitto/tree-sitter-powershell.svg?branch=master)](https://travis-ci.org/jrsconfitto/tree-sitter-powershell)
