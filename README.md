@@ -1,6 +1,6 @@
 # NOTE
 
-There's an official repo of a Tree Sitter implementation for PowerShell, please direct any efforts there rather than in this repo: https://github.com/powershell/tree-sitter-powershell.
+There's an official Tree Sitter implementation for PowerShell, please direct any efforts there: https://github.com/powershell/tree-sitter-powershell.
 
 # tree-sitter-powershell
 
